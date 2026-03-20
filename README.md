@@ -287,7 +287,7 @@ skillbridge/
 
 ## 👥 Team
 
-**ARTPARK CodeForge Hackathon — 2024**
+**AI Apex - ARTPARK CodeForge Hackathon — 2024**
 
 ---
 
