@@ -1,0 +1,86 @@
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual Environment ───────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+.env/
+
+# ── Environment Variables ─────────────────────────────────────────────────────
+.env
+.env.local
+.env.docker
+.env.production
+*.env
+
+# ── Database ──────────────────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+skillbridge.db
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+dist/
+build/
+.npm/
+*.tsbuildinfo
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── OS Files ──────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+
+# ── IDE / Editor ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.user
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+docker-compose.infra.yml
+
+# ── ML Models / Large Files ───────────────────────────────────────────────────
+models/
+*.gguf
+*.bin
+*.pt
+*.pth
+*.onnx
+
+# ── Uploads / Temp ────────────────────────────────────────────────────────────
+uploads/
+temp/
+tmp/
+*.tmp
+
+# ── Test / Coverage ───────────────────────────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+coverage.xml
+
+# ── Sentence Transformers Cache ───────────────────────────────────────────────
+.cache/
+~/.cache/huggingface/

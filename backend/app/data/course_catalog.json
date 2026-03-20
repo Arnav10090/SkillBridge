@@ -1,0 +1,718 @@
+{
+    "version": "1.0",
+    "modules": [
+        {
+            "id": "M001",
+            "title": "Python for Everybody",
+            "provider": "Coursera (University of Michigan)",
+            "skill_tags": [
+                "PROG_PY"
+            ],
+            "difficulty": 1.5,
+            "duration_hours": 8,
+            "url": "https://www.coursera.org/specializations/python",
+            "description": "Foundations of Python 3 including variables, loops, functions, and file handling."
+        },
+        {
+            "id": "M002",
+            "title": "Complete Python Bootcamp",
+            "provider": "Udemy",
+            "skill_tags": [
+                "PROG_PY"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 22,
+            "url": "https://www.udemy.com/course/complete-python-bootcamp",
+            "description": "OOP, decorators, generators, and real-world Python projects from scratch."
+        },
+        {
+            "id": "M003",
+            "title": "JavaScript: The Complete Guide",
+            "provider": "Udemy",
+            "skill_tags": [
+                "PROG_JS"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 20,
+            "url": "https://www.udemy.com/course/javascript-the-complete-guide-2020-beginner-advanced",
+            "description": "ES6+, async/await, DOM, and modern JavaScript patterns."
+        },
+        {
+            "id": "M004",
+            "title": "TypeScript for JavaScript Developers",
+            "provider": "Udemy",
+            "skill_tags": [
+                "PROG_TS"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 8,
+            "url": "https://www.udemy.com/course/understanding-typescript",
+            "description": "Types, interfaces, generics, decorators and real-world TypeScript."
+        },
+        {
+            "id": "M005",
+            "title": "Java Programming and Software Engineering Fundamentals",
+            "provider": "Coursera (Duke)",
+            "skill_tags": [
+                "PROG_JAVA"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 20,
+            "url": "https://www.coursera.org/specializations/java-programming",
+            "description": "Java syntax, OOP principles, arrays, and software engineering practice."
+        },
+        {
+            "id": "M006",
+            "title": "Go: The Complete Developer's Guide",
+            "provider": "Udemy",
+            "skill_tags": [
+                "PROG_GO"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 14,
+            "url": "https://www.udemy.com/course/go-the-complete-developers-guide",
+            "description": "Goroutines, channels, interfaces, and production-ready Go services."
+        },
+        {
+            "id": "M007",
+            "title": "SQL for Data Analysis",
+            "provider": "Mode Analytics",
+            "skill_tags": [
+                "PROG_SQL"
+            ],
+            "difficulty": 1.5,
+            "duration_hours": 6,
+            "url": "https://mode.com/sql-tutorial",
+            "description": "SELECT, JOINs, aggregations, subqueries, and window functions."
+        },
+        {
+            "id": "M008",
+            "title": "Advanced SQL for Analytics",
+            "provider": "Coursera",
+            "skill_tags": [
+                "PROG_SQL",
+                "DATA_ENG"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 10,
+            "url": "https://www.coursera.org/learn/intermediate-postgresql",
+            "description": "CTEs, indexes, query optimization, and analytical SQL patterns."
+        },
+        {
+            "id": "M009",
+            "title": "React — The Complete Guide",
+            "provider": "Udemy (Academind)",
+            "skill_tags": [
+                "WEB_REACT"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 48,
+            "url": "https://www.udemy.com/course/react-the-complete-guide-incl-redux",
+            "description": "Hooks, Context API, Redux, React Router, and advanced patterns."
+        },
+        {
+            "id": "M010",
+            "title": "Next.js & React — The Complete Guide",
+            "provider": "Udemy",
+            "skill_tags": [
+                "WEB_NEXT",
+                "WEB_REACT"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 25,
+            "url": "https://www.udemy.com/course/nextjs-react-the-complete-guide",
+            "description": "SSR, API routes, dynamic routing, and deployment."
+        },
+        {
+            "id": "M011",
+            "title": "Node.js — The Complete Guide",
+            "provider": "Udemy (Academind)",
+            "skill_tags": [
+                "WEB_NODE"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 40,
+            "url": "https://www.udemy.com/course/nodejs-the-complete-guide",
+            "description": "Express.js, REST APIs, authentication, and MongoDB."
+        },
+        {
+            "id": "M012",
+            "title": "HTML & CSS Foundations",
+            "provider": "freeCodeCamp",
+            "skill_tags": [
+                "WEB_HTML",
+                "WEB_CSS"
+            ],
+            "difficulty": 1.0,
+            "duration_hours": 6,
+            "url": "https://www.freecodecamp.org/learn/responsive-web-design",
+            "description": "Semantic HTML5, CSS3, Flexbox, Grid, and responsive design."
+        },
+        {
+            "id": "M013",
+            "title": "REST API Design Best Practices",
+            "provider": "Udemy",
+            "skill_tags": [
+                "WEB_REST"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 6,
+            "url": "https://www.udemy.com/course/rest-api",
+            "description": "HTTP verbs, status codes, versioning, and authentication."
+        },
+        {
+            "id": "M014",
+            "title": "Django REST Framework — Build APIs",
+            "provider": "Udemy",
+            "skill_tags": [
+                "WEB_DJANGO",
+                "WEB_REST"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 12,
+            "url": "https://www.udemy.com/course/django-rest-framework",
+            "description": "Serializers, ViewSets, authentication, permissions, and filtering."
+        },
+        {
+            "id": "M015",
+            "title": "Flask: Build Web Applications with Python",
+            "provider": "Udemy",
+            "skill_tags": [
+                "WEB_FLASK"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 10,
+            "url": "https://www.udemy.com/course/flask-framework-complete-course-for-beginners",
+            "description": "Routes, templates, SQLAlchemy, REST APIs with Flask."
+        },
+        {
+            "id": "M016",
+            "title": "FastAPI — The Complete Course",
+            "provider": "Udemy",
+            "skill_tags": [
+                "WEB_FASTAPI",
+                "WEB_REST"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 10,
+            "url": "https://www.udemy.com/course/fastapi-the-complete-course",
+            "description": "Async endpoints, Pydantic validation, OAuth2, and deployment."
+        },
+        {
+            "id": "M017",
+            "title": "Machine Learning by Andrew Ng",
+            "provider": "Coursera (Stanford)",
+            "skill_tags": [
+                "ML_SKLEARN",
+                "ML_STATS",
+                "ML_FEATURE"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 60,
+            "url": "https://www.coursera.org/specializations/machine-learning-introduction",
+            "description": "Regression, classification, neural nets, unsupervised learning."
+        },
+        {
+            "id": "M018",
+            "title": "Scikit-learn Crash Course",
+            "provider": "Kaggle Learn",
+            "skill_tags": [
+                "ML_SKLEARN"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 4,
+            "url": "https://www.kaggle.com/learn/intro-to-machine-learning",
+            "description": "Pipelines, cross-validation, model selection, and evaluation."
+        },
+        {
+            "id": "M019",
+            "title": "Deep Learning Specialization",
+            "provider": "Coursera (deeplearning.ai)",
+            "skill_tags": [
+                "ML_DL",
+                "ML_TF"
+            ],
+            "difficulty": 4.0,
+            "duration_hours": 80,
+            "url": "https://www.coursera.org/specializations/deep-learning",
+            "description": "CNNs, RNNs, sequence models, and hyperparameter tuning."
+        },
+        {
+            "id": "M020",
+            "title": "PyTorch for Deep Learning",
+            "provider": "Udemy (Daniel Bourke)",
+            "skill_tags": [
+                "ML_TORCH",
+                "ML_DL"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 40,
+            "url": "https://www.udemy.com/course/pytorch-for-deep-learning",
+            "description": "Tensors, autograd, CNNs, transfer learning, and deployment."
+        },
+        {
+            "id": "M021",
+            "title": "NLP with Transformers",
+            "provider": "HuggingFace",
+            "skill_tags": [
+                "ML_NLP",
+                "ML_NLPBERT"
+            ],
+            "difficulty": 4.0,
+            "duration_hours": 30,
+            "url": "https://huggingface.co/course/chapter1",
+            "description": "BERT, fine-tuning, tokenization, and production NLP pipelines."
+        },
+        {
+            "id": "M022",
+            "title": "Computer Vision Fundamentals",
+            "provider": "Coursera (deeplearning.ai)",
+            "skill_tags": [
+                "ML_CV",
+                "ML_DL"
+            ],
+            "difficulty": 4.0,
+            "duration_hours": 25,
+            "url": "https://www.coursera.org/learn/convolutional-neural-networks",
+            "description": "CNNs, object detection, image segmentation, and data augmentation."
+        },
+        {
+            "id": "M023",
+            "title": "Feature Engineering for ML",
+            "provider": "Kaggle Learn",
+            "skill_tags": [
+                "ML_FEATURE"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 5,
+            "url": "https://www.kaggle.com/learn/feature-engineering",
+            "description": "Mutual information, encoding, PCA, and target encoding."
+        },
+        {
+            "id": "M024",
+            "title": "MLOps Specialization",
+            "provider": "Coursera (deeplearning.ai)",
+            "skill_tags": [
+                "ML_MLOPs"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 45,
+            "url": "https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops",
+            "description": "Model serving, monitoring, CI/CD for ML, and deployment."
+        },
+        {
+            "id": "M025",
+            "title": "Pandas for Data Analysis",
+            "provider": "Kaggle Learn",
+            "skill_tags": [
+                "ML_PANDAS"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 4,
+            "url": "https://www.kaggle.com/learn/pandas",
+            "description": "DataFrame operations, groupby, merge, reshape, and time series."
+        },
+        {
+            "id": "M026",
+            "title": "NumPy Fundamentals",
+            "provider": "Real Python",
+            "skill_tags": [
+                "ML_NUMPY"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 4,
+            "url": "https://realpython.com/numpy-tutorial",
+            "description": "Arrays, broadcasting, vectorized operations, linear algebra."
+        },
+        {
+            "id": "M027",
+            "title": "Statistics for Data Science",
+            "provider": "Coursera (Duke)",
+            "skill_tags": [
+                "ML_STATS",
+                "ML_PROB"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 20,
+            "url": "https://www.coursera.org/specializations/statistics",
+            "description": "Descriptive stats, probability, hypothesis testing, and Bayesian methods."
+        },
+        {
+            "id": "M028",
+            "title": "Data Visualization with Python",
+            "provider": "Coursera",
+            "skill_tags": [
+                "DATA_VIZ"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 8,
+            "url": "https://www.coursera.org/learn/python-for-data-visualization",
+            "description": "Matplotlib, Seaborn, Plotly, and dashboard-ready charts."
+        },
+        {
+            "id": "M029",
+            "title": "Exploratory Data Analysis",
+            "provider": "Kaggle Learn",
+            "skill_tags": [
+                "DS_EDA",
+                "ML_PANDAS"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 5,
+            "url": "https://www.kaggle.com/learn/data-visualization",
+            "description": "Profiling, correlation analysis, outlier detection, and visual EDA."
+        },
+        {
+            "id": "M030",
+            "title": "Data Engineering with Python",
+            "provider": "DataCamp",
+            "skill_tags": [
+                "DATA_ENG"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 30,
+            "url": "https://www.datacamp.com/tracks/data-engineer-with-python",
+            "description": "ETL pipelines, data warehousing, and batch vs stream processing."
+        },
+        {
+            "id": "M031",
+            "title": "Apache Spark — PySpark Hands-On",
+            "provider": "Udemy",
+            "skill_tags": [
+                "DATA_SPARK"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 18,
+            "url": "https://www.udemy.com/course/apache-spark-programming-in-python-for-beginners",
+            "description": "RDDs, DataFrames, Spark SQL, Streaming, and MLlib."
+        },
+        {
+            "id": "M032",
+            "title": "Apache Kafka Complete Guide",
+            "provider": "Udemy (Stephane Maarek)",
+            "skill_tags": [
+                "DATA_KAFKA"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 12,
+            "url": "https://www.udemy.com/course/apache-kafka",
+            "description": "Producers, consumers, Kafka Connect, and Kafka Streams."
+        },
+        {
+            "id": "M033",
+            "title": "Apache Airflow: The Hands-On Guide",
+            "provider": "Udemy",
+            "skill_tags": [
+                "DATA_AIRFLOW"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 9,
+            "url": "https://www.udemy.com/course/the-complete-hands-on-course-to-master-apache-airflow",
+            "description": "DAGs, operators, hooks, XComs, and production deployment."
+        },
+        {
+            "id": "M034",
+            "title": "PostgreSQL Bootcamp",
+            "provider": "Udemy",
+            "skill_tags": [
+                "DB_PG",
+                "PROG_SQL"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 12,
+            "url": "https://www.udemy.com/course/postgresqlmasterclass",
+            "description": "Administration, indexing, stored procedures, and performance tuning."
+        },
+        {
+            "id": "M035",
+            "title": "MongoDB — The Complete Developer's Guide",
+            "provider": "Udemy (Academind)",
+            "skill_tags": [
+                "DB_MONGO"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 18,
+            "url": "https://www.udemy.com/course/mongodb-the-complete-developers-guide",
+            "description": "CRUD, aggregation pipeline, indexes, Atlas, and transactions."
+        },
+        {
+            "id": "M036",
+            "title": "Redis — Complete Developer's Guide",
+            "provider": "Udemy",
+            "skill_tags": [
+                "DB_REDIS"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 8,
+            "url": "https://www.udemy.com/course/redis-the-complete-developers-guide-p",
+            "description": "Strings, hashes, sorted sets, pub/sub, and Redis OM."
+        },
+        {
+            "id": "M037",
+            "title": "Database Design & Normalization",
+            "provider": "Coursera (UC Davis)",
+            "skill_tags": [
+                "DB_DESIGN"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 12,
+            "url": "https://www.coursera.org/learn/database-design-and-modeling",
+            "description": "ER diagrams, normalization 1NF-3NF, BCNF, and indexing strategy."
+        },
+        {
+            "id": "M038",
+            "title": "AWS Certified Solutions Architect",
+            "provider": "Udemy (Stephane Maarek)",
+            "skill_tags": [
+                "CLOUD_AWS"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 30,
+            "url": "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03",
+            "description": "EC2, S3, VPC, RDS, Lambda, ECS, IAM, and architectural best practices."
+        },
+        {
+            "id": "M039",
+            "title": "Google Cloud Professional Data Engineer",
+            "provider": "Coursera (Google)",
+            "skill_tags": [
+                "CLOUD_GCP",
+                "DATA_ENG"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 35,
+            "url": "https://www.coursera.org/professional-certificates/gcp-data-engineering",
+            "description": "BigQuery, Dataflow, Pub/Sub, Cloud Storage, and ML on GCP."
+        },
+        {
+            "id": "M040",
+            "title": "Microsoft Azure Fundamentals AZ-900",
+            "provider": "Microsoft Learn",
+            "skill_tags": [
+                "CLOUD_AZURE"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 8,
+            "url": "https://learn.microsoft.com/en-us/certifications/azure-fundamentals",
+            "description": "Cloud concepts, core Azure services, security, and compliance."
+        },
+        {
+            "id": "M041",
+            "title": "Docker and Kubernetes: The Complete Guide",
+            "provider": "Udemy (Stephen Grider)",
+            "skill_tags": [
+                "DEVOPS_DOCKER",
+                "DEVOPS_K8S"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 22,
+            "url": "https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide",
+            "description": "Docker images, volumes, networking, Compose, and Kubernetes deployments."
+        },
+        {
+            "id": "M042",
+            "title": "CI/CD with GitHub Actions",
+            "provider": "GitHub Learning Lab",
+            "skill_tags": [
+                "DEVOPS_CICD"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 8,
+            "url": "https://lab.github.com/githubtraining/github-actions-continuous-delivery",
+            "description": "Workflows, actions, secrets, matrix builds, and cloud deployment."
+        },
+        {
+            "id": "M043",
+            "title": "Terraform — Beginner to Expert",
+            "provider": "Udemy",
+            "skill_tags": [
+                "DEVOPS_TERRAFORM"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 14,
+            "url": "https://www.udemy.com/course/terraform-beginner-to-advanced",
+            "description": "HCL, providers, state management, modules, and Terraform Cloud."
+        },
+        {
+            "id": "M044",
+            "title": "Git & GitHub Complete Course",
+            "provider": "Udemy",
+            "skill_tags": [
+                "DEVOPS_GIT"
+            ],
+            "difficulty": 1.5,
+            "duration_hours": 6,
+            "url": "https://www.udemy.com/course/git-and-github-bootcamp",
+            "description": "Branching, merging, rebasing, pull requests, and team workflows."
+        },
+        {
+            "id": "M045",
+            "title": "Linux Command Line Basics",
+            "provider": "Udacity",
+            "skill_tags": [
+                "DEVOPS_LINUX",
+                "PROG_BASH"
+            ],
+            "difficulty": 1.5,
+            "duration_hours": 5,
+            "url": "https://www.udacity.com/course/linux-command-line-basics--ud595",
+            "description": "Navigation, permissions, processes, pipes, and bash scripting."
+        },
+        {
+            "id": "M046",
+            "title": "Agile Scrum Fundamentals",
+            "provider": "Coursera",
+            "skill_tags": [
+                "PM_AGILE"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 6,
+            "url": "https://www.coursera.org/learn/agile-scrum-fundamentals",
+            "description": "Scrum ceremonies, roles, backlogs, and sprint execution."
+        },
+        {
+            "id": "M047",
+            "title": "System Design Interview — An Insider's Guide",
+            "provider": "ByteByteGo",
+            "skill_tags": [
+                "ARCH_SYSTEM"
+            ],
+            "difficulty": 4.0,
+            "duration_hours": 20,
+            "url": "https://bytebytego.com",
+            "description": "Scalability, caching, load balancing, databases, and microservices."
+        },
+        {
+            "id": "M048",
+            "title": "Data Structures and Algorithms in Python",
+            "provider": "Udemy",
+            "skill_tags": [
+                "ALGO_DS"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 16,
+            "url": "https://www.udemy.com/course/data-structures-algorithms-python",
+            "description": "Arrays, trees, graphs, sorting, searching, and dynamic programming."
+        },
+        {
+            "id": "M049",
+            "title": "Monitoring with Prometheus and Grafana",
+            "provider": "Udemy",
+            "skill_tags": [
+                "OPS_MONITOR"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 8,
+            "url": "https://www.udemy.com/course/monitoring-and-alerting-with-prometheus",
+            "description": "Metrics, alerting, dashboards, and distributed tracing."
+        },
+        {
+            "id": "M050",
+            "title": "Cybersecurity Fundamentals",
+            "provider": "Coursera (IBM)",
+            "skill_tags": [
+                "SEC_BASICS"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 12,
+            "url": "https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst",
+            "description": "Threat analysis, network security, cryptography, and incident response."
+        },
+        {
+            "id": "M051",
+            "title": "Digital Marketing Fundamentals",
+            "provider": "Google Digital Garage",
+            "skill_tags": [
+                "MKT_DIGITAL"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 10,
+            "url": "https://learndigital.withgoogle.com/digitalgarage",
+            "description": "SEO, SEM, social media, content marketing, and analytics."
+        },
+        {
+            "id": "M052",
+            "title": "Excel for Business",
+            "provider": "Coursera (Macquarie)",
+            "skill_tags": [
+                "FINANCE_EXCEL"
+            ],
+            "difficulty": 1.5,
+            "duration_hours": 8,
+            "url": "https://www.coursera.org/learn/excel-essentials",
+            "description": "Formulas, pivot tables, VLOOKUP, charts, and data analysis."
+        },
+        {
+            "id": "M053",
+            "title": "Financial Modeling & Valuation",
+            "provider": "Udemy (CFI)",
+            "skill_tags": [
+                "FINANCE_MODEL"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 15,
+            "url": "https://www.udemy.com/course/financial-modeling-for-beginners",
+            "description": "DCF, comparable analysis, LBO modeling, and Excel-based valuation."
+        },
+        {
+            "id": "M054",
+            "title": "Supply Chain Management Fundamentals",
+            "provider": "Coursera (Rutgers)",
+            "skill_tags": [
+                "OPS_SUPPLY"
+            ],
+            "difficulty": 2.5,
+            "duration_hours": 12,
+            "url": "https://www.coursera.org/specializations/supply-chain-management",
+            "description": "Procurement, inventory, logistics, and demand forecasting."
+        },
+        {
+            "id": "M055",
+            "title": "Product Management Fundamentals",
+            "provider": "Coursera (Duke)",
+            "skill_tags": [
+                "PM_PRODUCT"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 16,
+            "url": "https://www.coursera.org/learn/product-management",
+            "description": "Discovery, roadmapping, prioritization, metrics, and stakeholder alignment."
+        },
+        {
+            "id": "M056",
+            "title": "Testing with Pytest",
+            "provider": "Real Python",
+            "skill_tags": [
+                "TEST_UNIT"
+            ],
+            "difficulty": 2.0,
+            "duration_hours": 5,
+            "url": "https://realpython.com/pytest-python-testing",
+            "description": "Test writing, fixtures, mocking, parametrize, and CI integration."
+        },
+        {
+            "id": "M057",
+            "title": "Application Security — OWASP Top 10",
+            "provider": "Udemy",
+            "skill_tags": [
+                "SEC_APPSEC"
+            ],
+            "difficulty": 3.5,
+            "duration_hours": 10,
+            "url": "https://www.udemy.com/course/owasp-top-10-web-application-security",
+            "description": "Injection, XSS, CSRF, broken auth, and secure coding practices."
+        },
+        {
+            "id": "M058",
+            "title": "GraphQL with React and Apollo",
+            "provider": "Udemy",
+            "skill_tags": [
+                "WEB_GRAPHQL"
+            ],
+            "difficulty": 3.0,
+            "duration_hours": 12,
+            "url": "https://www.udemy.com/course/graphql-with-react-course",
+            "description": "Schema, queries, mutations, subscriptions, and Apollo Client."
+        }
+    ]
+}
