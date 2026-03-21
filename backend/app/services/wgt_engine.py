@@ -5,7 +5,23 @@ from app.services.data_loader import (
     get_all_skills, get_prerequisites, get_modules_for_skill,
     get_skill_by_id, build_prerequisite_graph, get_reverse_prerequisite_graph
 )
+import json as _json
+import os as _os
 
+def _load_demand_weights() -> dict:
+    """Load data-driven skill demand weights computed from Kaggle datasets."""
+    path = _os.path.join(_os.path.dirname(__file__), "..", "data", "skill_frequency_stats.json")
+    try:
+        with open(path, "r") as f:
+            stats = _json.load(f)
+        weights = stats.get("skill_demand_weights", {})
+        print(f"[WGT] Loaded dataset demand weights for {len(weights)} skills")
+        return weights
+    except FileNotFoundError:
+        print("[WGT] No demand weights found, using defaults")
+        return {}
+
+DEMAND_WEIGHTS = _load_demand_weights()
 
 # ─── P-Score Formula ─────────────────────────────────────────────────────────
 
@@ -18,20 +34,36 @@ def compute_p_score(
     """
     Original WGT Priority Score formula:
     P = 0.40 * gap_severity
-      + 0.30 * requirement_weight
+      + 0.30 * requirement_weight  (boosted by Kaggle JD demand data)
       + 0.20 * dependency_urgency
       + 0.10 * experience_penalty
 
     Higher P-score = teach this skill sooner.
+
+    Dataset integration:
+    - requirement_weight is boosted by data-driven demand weights
+      computed from 2277 real job descriptions (Kaggle JD Dataset)
+    - High JD frequency skills (e.g. JavaScript, SQL) get priority boost
     """
-    # Gap severity: how missing is this skill (0=fully covered, 1=completely missing)
+
+    # ── Gap severity: how missing is this skill ───────────────────────────────
+    # 0.0 = fully covered, 1.0 = completely missing
     gap_severity = 1.0 - gap.coverage_score
 
-    # Requirement weight: required skills (1.5) are prioritized over preferred (1.0)
+    # ── Requirement weight: required > preferred ──────────────────────────────
+    # gap.weight = 1.5 if required, 1.0 if preferred
     # Normalize to 0-1 range (max weight is 1.5)
     requirement_weight = min(gap.weight / 1.5, 1.0)
 
-    # Experience penalty: reduce priority of very basic skills for senior hires
+    # ── Dataset demand boost (Kaggle JD Dataset) ──────────────────────────────
+    # Skills that appear frequently in real JDs are more valuable to learn
+    # demand_boost is a ratio (0.0-1.0) from skill_frequency_stats.json
+    demand_boost   = DEMAND_WEIGHTS.get(gap.skill_id, 0.0)
+    dataset_factor = min(demand_boost * 0.5, 0.15)  # max +0.15 boost
+    requirement_weight = min(requirement_weight + dataset_factor, 1.0)
+
+    # ── Experience penalty: reduce priority of trivial skills ─────────────────
+    # Senior hires should skip beginner-level skill recommendations
     experience_penalty = 1.0
     skill_data = get_skill_by_id(gap.skill_id)
     if skill_data:
@@ -39,13 +71,14 @@ def compute_p_score(
         if experience_years > 5 and skill_difficulty <= 1.5:
             experience_penalty = 0.2   # senior hire, basic skill → low priority
         elif experience_years > 3 and skill_difficulty <= 1.0:
-            experience_penalty = 0.1
+            experience_penalty = 0.1   # mid hire, intro skill → very low priority
 
+    # ── Final P-Score ─────────────────────────────────────────────────────────
     p_score = (
-        0.40 * gap_severity +
-        0.30 * requirement_weight +
-        0.20 * dependency_urgency +
-        0.10 * experience_penalty
+        0.40 * gap_severity        +   # how missing is it?
+        0.30 * requirement_weight  +   # how important is it? (JD + dataset)
+        0.20 * dependency_urgency  +   # do other skills depend on it?
+        0.10 * experience_penalty      # is it appropriate for this hire's level?
     )
 
     return round(min(p_score, 1.0), 4)

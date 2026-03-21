@@ -1,1203 +1,1220 @@
 {
-    "version": "1.0",
-    "skills": [
-        {
-            "id": "PROG_PY",
-            "name": "Python",
-            "aliases": [
-                "python3",
-                "python programming",
-                "py",
-                "python developer"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 2.0
-        },
-        {
-            "id": "PROG_JS",
-            "name": "JavaScript",
-            "aliases": [
-                "js",
-                "javascript",
-                "es6",
-                "ecmascript",
-                "vanilla js"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.0
-        },
-        {
-            "id": "PROG_TS",
-            "name": "TypeScript",
-            "aliases": [
-                "ts",
-                "typescript"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.5
-        },
-        {
-            "id": "PROG_JAVA",
-            "name": "Java",
-            "aliases": [
-                "java programming",
-                "java se",
-                "java ee",
-                "spring java"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 2.5
-        },
-        {
-            "id": "PROG_CPP",
-            "name": "C++",
-            "aliases": [
-                "cpp",
-                "c plus plus",
-                "c++17",
-                "c++14"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 3.5
-        },
-        {
-            "id": "PROG_GO",
-            "name": "Go",
-            "aliases": [
-                "golang",
-                "go lang",
-                "go programming"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 2.5
-        },
-        {
-            "id": "PROG_RUST",
-            "name": "Rust",
-            "aliases": [
-                "rust lang",
-                "rust programming"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 4.0
-        },
-        {
-            "id": "PROG_R",
-            "name": "R",
-            "aliases": [
-                "r programming",
-                "r language",
-                "rstudio",
-                "r statistical"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 2.0
-        },
-        {
-            "id": "PROG_SQL",
-            "name": "SQL",
-            "aliases": [
-                "structured query language",
-                "sql queries",
-                "sql programming",
-                "t-sql",
-                "pl/sql"
-            ],
-            "category": "technical",
-            "domain": "data_engineering",
-            "difficulty": 2.0
-        },
-        {
-            "id": "PROG_BASH",
-            "name": "Bash Scripting",
-            "aliases": [
-                "bash",
-                "shell scripting",
-                "shell script",
-                "bash script",
-                "linux scripting"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 2.0
-        },
-        {
-            "id": "WEB_REACT",
-            "name": "React",
-            "aliases": [
-                "reactjs",
-                "react.js",
-                "react js",
-                "react hooks"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 3.0
-        },
-        {
-            "id": "WEB_VUE",
-            "name": "Vue.js",
-            "aliases": [
-                "vue",
-                "vuejs",
-                "vue.js",
-                "vue 3"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.5
-        },
-        {
-            "id": "WEB_ANGULAR",
-            "name": "Angular",
-            "aliases": [
-                "angularjs",
-                "angular.js",
-                "angular framework"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 3.0
-        },
-        {
-            "id": "WEB_NODE",
-            "name": "Node.js",
-            "aliases": [
-                "nodejs",
-                "node js",
-                "node",
-                "express",
-                "expressjs"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.5
-        },
-        {
-            "id": "WEB_HTML",
-            "name": "HTML",
-            "aliases": [
-                "html5",
-                "html/css",
-                "markup",
-                "semantic html"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 1.0
-        },
-        {
-            "id": "WEB_CSS",
-            "name": "CSS",
-            "aliases": [
-                "css3",
-                "stylesheets",
-                "cascading style sheets",
-                "tailwind",
-                "sass",
-                "scss"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 1.5
-        },
-        {
-            "id": "WEB_REST",
-            "name": "REST APIs",
-            "aliases": [
-                "rest api",
-                "restful api",
-                "restful",
-                "rest services",
-                "api development",
-                "web api"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.5
-        },
-        {
-            "id": "WEB_GRAPHQL",
-            "name": "GraphQL",
-            "aliases": [
-                "graph ql",
-                "graphql api",
-                "apollo"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 3.0
-        },
-        {
-            "id": "WEB_NEXT",
-            "name": "Next.js",
-            "aliases": [
-                "nextjs",
-                "next js",
-                "next.js"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 3.0
-        },
-        {
-            "id": "WEB_DJANGO",
-            "name": "Django",
-            "aliases": [
-                "django",
-                "django rest framework",
-                "drf",
-                "django python"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 3.0
-        },
-        {
-            "id": "WEB_FLASK",
-            "name": "Flask",
-            "aliases": [
-                "flask",
-                "flask python",
-                "flask api"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.5
-        },
-        {
-            "id": "WEB_FASTAPI",
-            "name": "FastAPI",
-            "aliases": [
-                "fastapi",
-                "fast api"
-            ],
-            "category": "technical",
-            "domain": "web_development",
-            "difficulty": 2.5
-        },
-        {
-            "id": "ML_SKLEARN",
-            "name": "Scikit-learn",
-            "aliases": [
-                "sklearn",
-                "scikit learn",
-                "scikit-learn",
-                "machine learning python"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 3.0
-        },
-        {
-            "id": "ML_TF",
-            "name": "TensorFlow",
-            "aliases": [
-                "tensorflow",
-                "tf",
-                "tf2",
-                "keras"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 3.5
-        },
-        {
-            "id": "ML_TORCH",
-            "name": "PyTorch",
-            "aliases": [
-                "pytorch",
-                "torch",
-                "pytorch lightning"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 3.5
-        },
-        {
-            "id": "ML_NLPBERT",
-            "name": "Transformers / LLMs",
-            "aliases": [
-                "bert",
-                "transformers",
-                "huggingface",
-                "hugging face",
-                "llm",
-                "large language models",
-                "gpt",
-                "fine-tuning"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 4.0
-        },
-        {
-            "id": "ML_PANDAS",
-            "name": "Pandas",
-            "aliases": [
-                "pandas",
-                "dataframe",
-                "data manipulation python",
-                "pandas dataframe"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 2.5
-        },
-        {
-            "id": "ML_NUMPY",
-            "name": "NumPy",
-            "aliases": [
-                "numpy",
-                "numerical python",
-                "np",
-                "numpy arrays"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 2.0
-        },
-        {
-            "id": "ML_STATS",
-            "name": "Statistics",
-            "aliases": [
-                "statistical analysis",
-                "statistics",
-                "statistical modeling",
-                "probability and statistics",
-                "inferential statistics"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 2.5
-        },
-        {
-            "id": "ML_PROB",
-            "name": "Probability Theory",
-            "aliases": [
-                "probability",
-                "bayesian",
-                "bayesian statistics",
-                "stochastic",
-                "bayesian inference"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 3.0
-        },
-        {
-            "id": "ML_DL",
-            "name": "Deep Learning",
-            "aliases": [
-                "deep learning",
-                "neural networks",
-                "cnn",
-                "rnn",
-                "lstm",
-                "neural net"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 4.0
-        },
-        {
-            "id": "ML_CV",
-            "name": "Computer Vision",
-            "aliases": [
-                "cv",
-                "image processing",
-                "object detection",
-                "image recognition",
-                "opencv"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 4.0
-        },
-        {
-            "id": "ML_NLP",
-            "name": "Natural Language Processing",
-            "aliases": [
-                "nlp",
-                "text mining",
-                "text analysis",
-                "named entity recognition",
-                "ner",
-                "text classification"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 3.5
-        },
-        {
-            "id": "ML_MLOPs",
-            "name": "MLOps",
-            "aliases": [
-                "mlops",
-                "ml engineering",
-                "model deployment",
-                "model serving",
-                "ml pipeline",
-                "model monitoring"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 3.5
-        },
-        {
-            "id": "ML_FEATURE",
-            "name": "Feature Engineering",
-            "aliases": [
-                "feature engineering",
-                "feature extraction",
-                "feature selection",
-                "feature importance"
-            ],
-            "category": "technical",
-            "domain": "machine_learning",
-            "difficulty": 3.0
-        },
-        {
-            "id": "DATA_VIZ",
-            "name": "Data Visualization",
-            "aliases": [
-                "data visualization",
-                "matplotlib",
-                "seaborn",
-                "plotly",
-                "tableau",
-                "power bi",
-                "powerbi",
-                "dashboards"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 2.5
-        },
-        {
-            "id": "DATA_ENG",
-            "name": "Data Engineering",
-            "aliases": [
-                "data engineering",
-                "etl",
-                "data pipelines",
-                "data ingestion",
-                "data warehousing"
-            ],
-            "category": "technical",
-            "domain": "data_engineering",
-            "difficulty": 3.0
-        },
-        {
-            "id": "DATA_SPARK",
-            "name": "Apache Spark",
-            "aliases": [
-                "spark",
-                "pyspark",
-                "apache spark",
-                "spark sql"
-            ],
-            "category": "technical",
-            "domain": "data_engineering",
-            "difficulty": 3.5
-        },
-        {
-            "id": "DATA_KAFKA",
-            "name": "Apache Kafka",
-            "aliases": [
-                "kafka",
-                "apache kafka",
-                "kafka streams",
-                "event streaming"
-            ],
-            "category": "technical",
-            "domain": "data_engineering",
-            "difficulty": 3.5
-        },
-        {
-            "id": "DATA_AIRFLOW",
-            "name": "Apache Airflow",
-            "aliases": [
-                "airflow",
-                "apache airflow",
-                "workflow orchestration",
-                "dag"
-            ],
-            "category": "technical",
-            "domain": "data_engineering",
-            "difficulty": 3.0
-        },
-        {
-            "id": "DB_PG",
-            "name": "PostgreSQL",
-            "aliases": [
-                "postgres",
-                "postgresql",
-                "pg",
-                "psql"
-            ],
-            "category": "technical",
-            "domain": "databases",
-            "difficulty": 2.5
-        },
-        {
-            "id": "DB_MYSQL",
-            "name": "MySQL",
-            "aliases": [
-                "mysql",
-                "mariadb",
-                "mysql database"
-            ],
-            "category": "technical",
-            "domain": "databases",
-            "difficulty": 2.0
-        },
-        {
-            "id": "DB_MONGO",
-            "name": "MongoDB",
-            "aliases": [
-                "mongodb",
-                "mongo",
-                "nosql mongodb",
-                "mongoose"
-            ],
-            "category": "technical",
-            "domain": "databases",
-            "difficulty": 2.5
-        },
-        {
-            "id": "DB_REDIS",
-            "name": "Redis",
-            "aliases": [
-                "redis",
-                "redis cache",
-                "redis queue"
-            ],
-            "category": "technical",
-            "domain": "databases",
-            "difficulty": 2.5
-        },
-        {
-            "id": "DB_DESIGN",
-            "name": "Database Design",
-            "aliases": [
-                "database design",
-                "data modeling",
-                "schema design",
-                "erd",
-                "normalization",
-                "relational database"
-            ],
-            "category": "technical",
-            "domain": "databases",
-            "difficulty": 2.5
-        },
-        {
-            "id": "CLOUD_AWS",
-            "name": "AWS",
-            "aliases": [
-                "amazon web services",
-                "aws",
-                "ec2",
-                "s3",
-                "lambda",
-                "aws cloud",
-                "amazon cloud"
-            ],
-            "category": "technical",
-            "domain": "cloud",
-            "difficulty": 3.0
-        },
-        {
-            "id": "CLOUD_GCP",
-            "name": "Google Cloud Platform",
-            "aliases": [
-                "gcp",
-                "google cloud",
-                "bigquery",
-                "gke",
-                "google cloud platform"
-            ],
-            "category": "technical",
-            "domain": "cloud",
-            "difficulty": 3.0
-        },
-        {
-            "id": "CLOUD_AZURE",
-            "name": "Azure",
-            "aliases": [
-                "microsoft azure",
-                "azure cloud",
-                "azure devops",
-                "azure services"
-            ],
-            "category": "technical",
-            "domain": "cloud",
-            "difficulty": 3.0
-        },
-        {
-            "id": "DEVOPS_DOCKER",
-            "name": "Docker",
-            "aliases": [
-                "docker",
-                "containerization",
-                "docker containers",
-                "dockerfile",
-                "docker compose"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 2.5
-        },
-        {
-            "id": "DEVOPS_K8S",
-            "name": "Kubernetes",
-            "aliases": [
-                "k8s",
-                "kubernetes",
-                "kubectl",
-                "kubernetes orchestration",
-                "helm"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 3.5
-        },
-        {
-            "id": "DEVOPS_CICD",
-            "name": "CI/CD",
-            "aliases": [
-                "ci/cd",
-                "continuous integration",
-                "continuous deployment",
-                "github actions",
-                "jenkins",
-                "gitlab ci",
-                "cicd",
-                "devops pipeline"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 3.0
-        },
-        {
-            "id": "DEVOPS_TERRAFORM",
-            "name": "Terraform",
-            "aliases": [
-                "terraform",
-                "infrastructure as code",
-                "iac",
-                "hashicorp terraform"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 3.5
-        },
-        {
-            "id": "DEVOPS_GIT",
-            "name": "Git",
-            "aliases": [
-                "git",
-                "version control",
-                "github",
-                "gitlab",
-                "bitbucket",
-                "git workflow"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 1.5
-        },
-        {
-            "id": "DEVOPS_LINUX",
-            "name": "Linux",
-            "aliases": [
-                "linux",
-                "unix",
-                "ubuntu",
-                "centos",
-                "debian",
-                "linux administration",
-                "linux server"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 2.0
-        },
-        {
-            "id": "SEC_BASICS",
-            "name": "Cybersecurity Fundamentals",
-            "aliases": [
-                "cybersecurity",
-                "information security",
-                "infosec",
-                "security fundamentals",
-                "network security"
-            ],
-            "category": "technical",
-            "domain": "security",
-            "difficulty": 2.5
-        },
-        {
-            "id": "SEC_APPSEC",
-            "name": "Application Security",
-            "aliases": [
-                "appsec",
-                "application security",
-                "owasp",
-                "secure coding",
-                "sast",
-                "vulnerability"
-            ],
-            "category": "technical",
-            "domain": "security",
-            "difficulty": 3.5
-        },
-        {
-            "id": "PM_AGILE",
-            "name": "Agile Methodology",
-            "aliases": [
-                "agile",
-                "scrum",
-                "kanban",
-                "agile development",
-                "sprint planning",
-                "agile scrum"
-            ],
-            "category": "domain",
-            "domain": "management",
-            "difficulty": 2.0
-        },
-        {
-            "id": "PM_PRODUCT",
-            "name": "Product Management",
-            "aliases": [
-                "product management",
-                "product owner",
-                "product strategy",
-                "roadmapping",
-                "product roadmap"
-            ],
-            "category": "domain",
-            "domain": "management",
-            "difficulty": 3.0
-        },
-        {
-            "id": "SOFT_COMM",
-            "name": "Communication",
-            "aliases": [
-                "communication skills",
-                "verbal communication",
-                "written communication",
-                "presentation skills",
-                "public speaking"
-            ],
-            "category": "soft",
-            "domain": "soft_skills",
-            "difficulty": 1.0
-        },
-        {
-            "id": "SOFT_LEAD",
-            "name": "Leadership",
-            "aliases": [
-                "leadership",
-                "team leadership",
-                "people management",
-                "team lead",
-                "tech lead",
-                "mentoring"
-            ],
-            "category": "soft",
-            "domain": "soft_skills",
-            "difficulty": 2.5
-        },
-        {
-            "id": "SOFT_COLLAB",
-            "name": "Collaboration",
-            "aliases": [
-                "collaboration",
-                "teamwork",
-                "cross-functional",
-                "stakeholder management",
-                "team player"
-            ],
-            "category": "soft",
-            "domain": "soft_skills",
-            "difficulty": 1.0
-        },
-        {
-            "id": "SOFT_PROB",
-            "name": "Problem Solving",
-            "aliases": [
-                "problem solving",
-                "analytical thinking",
-                "critical thinking",
-                "troubleshooting",
-                "debugging"
-            ],
-            "category": "soft",
-            "domain": "soft_skills",
-            "difficulty": 1.5
-        },
-        {
-            "id": "ARCH_SYSTEM",
-            "name": "System Design",
-            "aliases": [
-                "system design",
-                "distributed systems",
-                "high availability",
-                "scalability",
-                "architecture design",
-                "software architecture"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 4.0
-        },
-        {
-            "id": "ALGO_DS",
-            "name": "Data Structures & Algorithms",
-            "aliases": [
-                "data structures",
-                "algorithms",
-                "dsa",
-                "leetcode",
-                "computational complexity",
-                "big o notation"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 3.0
-        },
-        {
-            "id": "TEST_UNIT",
-            "name": "Unit Testing",
-            "aliases": [
-                "unit testing",
-                "test driven development",
-                "tdd",
-                "pytest",
-                "jest",
-                "junit",
-                "testing"
-            ],
-            "category": "technical",
-            "domain": "software_engineering",
-            "difficulty": 2.0
-        },
-        {
-            "id": "OPS_MONITOR",
-            "name": "Monitoring & Observability",
-            "aliases": [
-                "monitoring",
-                "observability",
-                "prometheus",
-                "grafana",
-                "datadog",
-                "logging",
-                "tracing"
-            ],
-            "category": "technical",
-            "domain": "devops",
-            "difficulty": 2.5
-        },
-        {
-            "id": "FINANCE_MODEL",
-            "name": "Financial Modeling",
-            "aliases": [
-                "financial modeling",
-                "financial analysis",
-                "dcf",
-                "valuation",
-                "financial forecasting"
-            ],
-            "category": "domain",
-            "domain": "finance",
-            "difficulty": 3.0
-        },
-        {
-            "id": "FINANCE_EXCEL",
-            "name": "Excel",
-            "aliases": [
-                "microsoft excel",
-                "excel",
-                "spreadsheets",
-                "pivot tables",
-                "excel modeling",
-                "vlookup"
-            ],
-            "category": "tool",
-            "domain": "finance",
-            "difficulty": 1.5
-        },
-        {
-            "id": "MKT_DIGITAL",
-            "name": "Digital Marketing",
-            "aliases": [
-                "digital marketing",
-                "online marketing",
-                "seo",
-                "sem",
-                "ppc",
-                "google ads",
-                "social media marketing"
-            ],
-            "category": "domain",
-            "domain": "marketing",
-            "difficulty": 2.0
-        },
-        {
-            "id": "OPS_SUPPLY",
-            "name": "Supply Chain Management",
-            "aliases": [
-                "supply chain",
-                "logistics",
-                "procurement",
-                "inventory management",
-                "warehouse management"
-            ],
-            "category": "domain",
-            "domain": "operations",
-            "difficulty": 2.5
-        },
-        {
-            "id": "DS_EDA",
-            "name": "Exploratory Data Analysis",
-            "aliases": [
-                "eda",
-                "exploratory data analysis",
-                "data exploration",
-                "data profiling",
-                "statistical eda"
-            ],
-            "category": "technical",
-            "domain": "data_science",
-            "difficulty": 2.5
-        }
-    ],
-    "prerequisites": [
-        {
-            "from": "PROG_PY",
-            "to": "ML_PANDAS",
-            "weight": 0.95
-        },
-        {
-            "from": "PROG_PY",
-            "to": "ML_NUMPY",
-            "weight": 0.95
-        },
-        {
-            "from": "PROG_PY",
-            "to": "ML_SKLEARN",
-            "weight": 0.90
-        },
-        {
-            "from": "PROG_PY",
-            "to": "WEB_DJANGO",
-            "weight": 0.90
-        },
-        {
-            "from": "PROG_PY",
-            "to": "WEB_FLASK",
-            "weight": 0.90
-        },
-        {
-            "from": "PROG_PY",
-            "to": "WEB_FASTAPI",
-            "weight": 0.90
-        },
-        {
-            "from": "PROG_PY",
-            "to": "DATA_ENG",
-            "weight": 0.80
-        },
-        {
-            "from": "ML_NUMPY",
-            "to": "ML_PANDAS",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_NUMPY",
-            "to": "ML_SKLEARN",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_NUMPY",
-            "to": "ML_TF",
-            "weight": 0.90
-        },
-        {
-            "from": "ML_NUMPY",
-            "to": "ML_TORCH",
-            "weight": 0.90
-        },
-        {
-            "from": "ML_PANDAS",
-            "to": "DS_EDA",
-            "weight": 0.90
-        },
-        {
-            "from": "ML_PANDAS",
-            "to": "DATA_VIZ",
-            "weight": 0.75
-        },
-        {
-            "from": "ML_STATS",
-            "to": "ML_PROB",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_STATS",
-            "to": "ML_SKLEARN",
-            "weight": 0.80
-        },
-        {
-            "from": "ML_PROB",
-            "to": "ML_DL",
-            "weight": 0.80
-        },
-        {
-            "from": "ML_SKLEARN",
-            "to": "ML_FEATURE",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_SKLEARN",
-            "to": "ML_MLOPs",
-            "weight": 0.75
-        },
-        {
-            "from": "ML_DL",
-            "to": "ML_CV",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_DL",
-            "to": "ML_NLP",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_DL",
-            "to": "ML_NLPBERT",
-            "weight": 0.90
-        },
-        {
-            "from": "ML_TF",
-            "to": "ML_DL",
-            "weight": 0.85
-        },
-        {
-            "from": "ML_TORCH",
-            "to": "ML_DL",
-            "weight": 0.85
-        },
-        {
-            "from": "PROG_JS",
-            "to": "WEB_REACT",
-            "weight": 0.95
-        },
-        {
-            "from": "PROG_JS",
-            "to": "WEB_VUE",
-            "weight": 0.95
-        },
-        {
-            "from": "PROG_JS",
-            "to": "WEB_ANGULAR",
-            "weight": 0.95
-        },
-        {
-            "from": "PROG_JS",
-            "to": "WEB_NODE",
-            "weight": 0.90
-        },
-        {
-            "from": "WEB_REACT",
-            "to": "WEB_NEXT",
-            "weight": 0.90
-        },
-        {
-            "from": "WEB_HTML",
-            "to": "WEB_CSS",
-            "weight": 0.85
-        },
-        {
-            "from": "WEB_HTML",
-            "to": "WEB_REACT",
-            "weight": 0.70
-        },
-        {
-            "from": "PROG_SQL",
-            "to": "DB_PG",
-            "weight": 0.90
-        },
-        {
-            "from": "PROG_SQL",
-            "to": "DB_MYSQL",
-            "weight": 0.90
-        },
-        {
-            "from": "PROG_SQL",
-            "to": "DATA_ENG",
-            "weight": 0.85
-        },
-        {
-            "from": "DB_DESIGN",
-            "to": "DB_PG",
-            "weight": 0.80
-        },
-        {
-            "from": "DEVOPS_DOCKER",
-            "to": "DEVOPS_K8S",
-            "weight": 0.90
-        },
-        {
-            "from": "DEVOPS_GIT",
-            "to": "DEVOPS_CICD",
-            "weight": 0.85
-        },
-        {
-            "from": "DEVOPS_LINUX",
-            "to": "DEVOPS_DOCKER",
-            "weight": 0.75
-        },
-        {
-            "from": "DEVOPS_LINUX",
-            "to": "PROG_BASH",
-            "weight": 0.85
-        },
-        {
-            "from": "DATA_ENG",
-            "to": "DATA_SPARK",
-            "weight": 0.85
-        },
-        {
-            "from": "DATA_ENG",
-            "to": "DATA_KAFKA",
-            "weight": 0.80
-        },
-        {
-            "from": "DATA_ENG",
-            "to": "DATA_AIRFLOW",
-            "weight": 0.80
-        },
-        {
-            "from": "CLOUD_AWS",
-            "to": "DEVOPS_TERRAFORM",
-            "weight": 0.75
-        },
-        {
-            "from": "ALGO_DS",
-            "to": "ARCH_SYSTEM",
-            "weight": 0.80
-        }
-    ]
+  "version": "1.0",
+  "skills": [
+    {
+      "id": "PROG_PY",
+      "name": "Python",
+      "aliases": [
+        "python3",
+        "python programming",
+        "py",
+        "python developer"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 2.0
+    },
+    {
+      "id": "PROG_JS",
+      "name": "JavaScript",
+      "aliases": [
+        "js",
+        "javascript",
+        "es6",
+        "ecmascript",
+        "vanilla js"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.0
+    },
+    {
+      "id": "PROG_TS",
+      "name": "TypeScript",
+      "aliases": [
+        "ts",
+        "typescript"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.5
+    },
+    {
+      "id": "PROG_JAVA",
+      "name": "Java",
+      "aliases": [
+        "java programming",
+        "java se",
+        "java ee",
+        "spring java"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 2.5
+    },
+    {
+      "id": "PROG_CPP",
+      "name": "C++",
+      "aliases": [
+        "cpp",
+        "c plus plus",
+        "c++17",
+        "c++14"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 3.5
+    },
+    {
+      "id": "PROG_GO",
+      "name": "Go",
+      "aliases": [
+        "golang",
+        "go lang",
+        "go programming"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 2.5
+    },
+    {
+      "id": "PROG_RUST",
+      "name": "Rust",
+      "aliases": [
+        "rust lang",
+        "rust programming"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 4.0
+    },
+    {
+      "id": "PROG_R",
+      "name": "R",
+      "aliases": [
+        "r programming",
+        "r language",
+        "rstudio",
+        "r statistical"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 2.0
+    },
+    {
+      "id": "PROG_SQL",
+      "name": "SQL",
+      "aliases": [
+        "structured query language",
+        "sql queries",
+        "sql programming",
+        "t-sql",
+        "pl/sql",
+        "mysql",
+        "postgresql",
+        "postgres"
+      ],
+      "category": "technical",
+      "domain": "data_engineering",
+      "difficulty": 2.0
+    },
+    {
+      "id": "PROG_BASH",
+      "name": "Bash Scripting",
+      "aliases": [
+        "bash",
+        "shell scripting",
+        "shell script",
+        "bash script",
+        "linux scripting"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 2.0
+    },
+    {
+      "id": "WEB_REACT",
+      "name": "React",
+      "aliases": [
+        "reactjs",
+        "react.js",
+        "react js",
+        "react hooks"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 3.0
+    },
+    {
+      "id": "WEB_VUE",
+      "name": "Vue.js",
+      "aliases": [
+        "vue",
+        "vuejs",
+        "vue.js",
+        "vue 3"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.5
+    },
+    {
+      "id": "WEB_ANGULAR",
+      "name": "Angular",
+      "aliases": [
+        "angularjs",
+        "angular.js",
+        "angular framework"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 3.0
+    },
+    {
+      "id": "WEB_NODE",
+      "name": "Node.js",
+      "aliases": [
+        "nodejs",
+        "node js",
+        "node",
+        "express",
+        "expressjs"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.5
+    },
+    {
+      "id": "WEB_HTML",
+      "name": "HTML",
+      "aliases": [
+        "html5",
+        "html/css",
+        "markup",
+        "semantic html"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 1.0
+    },
+    {
+      "id": "WEB_CSS",
+      "name": "CSS",
+      "aliases": [
+        "css3",
+        "stylesheets",
+        "cascading style sheets",
+        "tailwind",
+        "sass",
+        "scss",
+        "bootstrap"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 1.5
+    },
+    {
+      "id": "WEB_REST",
+      "name": "REST APIs",
+      "aliases": [
+        "rest api",
+        "restful api",
+        "restful",
+        "rest services",
+        "api development",
+        "web api"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.5
+    },
+    {
+      "id": "WEB_GRAPHQL",
+      "name": "GraphQL",
+      "aliases": [
+        "graph ql",
+        "graphql api",
+        "apollo"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 3.0
+    },
+    {
+      "id": "WEB_NEXT",
+      "name": "Next.js",
+      "aliases": [
+        "nextjs",
+        "next js",
+        "next.js"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 3.0
+    },
+    {
+      "id": "WEB_DJANGO",
+      "name": "Django",
+      "aliases": [
+        "django",
+        "django rest framework",
+        "drf",
+        "django python"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 3.0
+    },
+    {
+      "id": "WEB_FLASK",
+      "name": "Flask",
+      "aliases": [
+        "flask",
+        "flask python",
+        "flask api"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.5
+    },
+    {
+      "id": "WEB_FASTAPI",
+      "name": "FastAPI",
+      "aliases": [
+        "fastapi",
+        "fast api"
+      ],
+      "category": "technical",
+      "domain": "web_development",
+      "difficulty": 2.5
+    },
+    {
+      "id": "ML_SKLEARN",
+      "name": "Scikit-learn",
+      "aliases": [
+        "sklearn",
+        "scikit learn",
+        "scikit-learn",
+        "machine learning python"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 3.0
+    },
+    {
+      "id": "ML_TF",
+      "name": "TensorFlow",
+      "aliases": [
+        "tensorflow",
+        "tf",
+        "tf2",
+        "keras"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 3.5
+    },
+    {
+      "id": "ML_TORCH",
+      "name": "PyTorch",
+      "aliases": [
+        "pytorch",
+        "torch",
+        "pytorch lightning"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 3.5
+    },
+    {
+      "id": "ML_NLPBERT",
+      "name": "Transformers / LLMs",
+      "aliases": [
+        "bert",
+        "transformers",
+        "huggingface",
+        "hugging face",
+        "llm",
+        "large language models",
+        "gpt",
+        "fine-tuning"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 4.0
+    },
+    {
+      "id": "ML_PANDAS",
+      "name": "Pandas",
+      "aliases": [
+        "pandas",
+        "dataframe",
+        "data manipulation python",
+        "pandas dataframe"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 2.5
+    },
+    {
+      "id": "ML_NUMPY",
+      "name": "NumPy",
+      "aliases": [
+        "numpy",
+        "numerical python",
+        "np",
+        "numpy arrays"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 2.0
+    },
+    {
+      "id": "ML_STATS",
+      "name": "Statistics",
+      "aliases": [
+        "statistical analysis",
+        "statistics",
+        "statistical modeling",
+        "probability and statistics",
+        "inferential statistics"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 2.5
+    },
+    {
+      "id": "ML_PROB",
+      "name": "Probability Theory",
+      "aliases": [
+        "probability",
+        "bayesian",
+        "bayesian statistics",
+        "stochastic",
+        "bayesian inference"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 3.0
+    },
+    {
+      "id": "ML_DL",
+      "name": "Deep Learning",
+      "aliases": [
+        "deep learning",
+        "neural networks",
+        "cnn",
+        "rnn",
+        "lstm",
+        "neural net",
+        "neural network"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 4.0
+    },
+    {
+      "id": "ML_CV",
+      "name": "Computer Vision",
+      "aliases": [
+        "cv",
+        "image processing",
+        "object detection",
+        "image recognition",
+        "opencv"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 4.0
+    },
+    {
+      "id": "ML_NLP",
+      "name": "Natural Language Processing",
+      "aliases": [
+        "nlp",
+        "text mining",
+        "text analysis",
+        "named entity recognition",
+        "ner",
+        "text classification",
+        "nltk"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 3.5
+    },
+    {
+      "id": "ML_MLOPs",
+      "name": "MLOps",
+      "aliases": [
+        "mlops",
+        "ml engineering",
+        "model deployment",
+        "model serving",
+        "ml pipeline",
+        "model monitoring"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 3.5
+    },
+    {
+      "id": "ML_FEATURE",
+      "name": "Feature Engineering",
+      "aliases": [
+        "feature engineering",
+        "feature extraction",
+        "feature selection",
+        "feature importance"
+      ],
+      "category": "technical",
+      "domain": "machine_learning",
+      "difficulty": 3.0
+    },
+    {
+      "id": "DATA_VIZ",
+      "name": "Data Visualization",
+      "aliases": [
+        "data visualization",
+        "matplotlib",
+        "seaborn",
+        "plotly",
+        "tableau",
+        "power bi",
+        "powerbi",
+        "dashboards"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 2.5
+    },
+    {
+      "id": "DATA_ENG",
+      "name": "Data Engineering",
+      "aliases": [
+        "data engineering",
+        "etl",
+        "data pipelines",
+        "data ingestion",
+        "data warehousing",
+        "data pipeline"
+      ],
+      "category": "technical",
+      "domain": "data_engineering",
+      "difficulty": 3.0
+    },
+    {
+      "id": "DATA_SPARK",
+      "name": "Apache Spark",
+      "aliases": [
+        "spark",
+        "pyspark",
+        "apache spark",
+        "spark sql"
+      ],
+      "category": "technical",
+      "domain": "data_engineering",
+      "difficulty": 3.5
+    },
+    {
+      "id": "DATA_KAFKA",
+      "name": "Apache Kafka",
+      "aliases": [
+        "kafka",
+        "apache kafka",
+        "kafka streams",
+        "event streaming"
+      ],
+      "category": "technical",
+      "domain": "data_engineering",
+      "difficulty": 3.5
+    },
+    {
+      "id": "DATA_AIRFLOW",
+      "name": "Apache Airflow",
+      "aliases": [
+        "airflow",
+        "apache airflow",
+        "workflow orchestration",
+        "dag"
+      ],
+      "category": "technical",
+      "domain": "data_engineering",
+      "difficulty": 3.0
+    },
+    {
+      "id": "DB_PG",
+      "name": "PostgreSQL",
+      "aliases": [
+        "postgres",
+        "postgresql",
+        "pg",
+        "psql"
+      ],
+      "category": "technical",
+      "domain": "databases",
+      "difficulty": 2.5
+    },
+    {
+      "id": "DB_MYSQL",
+      "name": "MySQL",
+      "aliases": [
+        "mysql",
+        "mariadb",
+        "mysql database"
+      ],
+      "category": "technical",
+      "domain": "databases",
+      "difficulty": 2.0
+    },
+    {
+      "id": "DB_MONGO",
+      "name": "MongoDB",
+      "aliases": [
+        "mongodb",
+        "mongo",
+        "nosql mongodb",
+        "mongoose"
+      ],
+      "category": "technical",
+      "domain": "databases",
+      "difficulty": 2.5
+    },
+    {
+      "id": "DB_REDIS",
+      "name": "Redis",
+      "aliases": [
+        "redis",
+        "redis cache",
+        "redis queue"
+      ],
+      "category": "technical",
+      "domain": "databases",
+      "difficulty": 2.5
+    },
+    {
+      "id": "DB_DESIGN",
+      "name": "Database Design",
+      "aliases": [
+        "database design",
+        "data modeling",
+        "schema design",
+        "erd",
+        "normalization",
+        "relational database"
+      ],
+      "category": "technical",
+      "domain": "databases",
+      "difficulty": 2.5
+    },
+    {
+      "id": "CLOUD_AWS",
+      "name": "AWS",
+      "aliases": [
+        "amazon web services",
+        "aws",
+        "ec2",
+        "s3",
+        "lambda",
+        "aws cloud",
+        "amazon cloud"
+      ],
+      "category": "technical",
+      "domain": "cloud",
+      "difficulty": 3.0
+    },
+    {
+      "id": "CLOUD_GCP",
+      "name": "Google Cloud Platform",
+      "aliases": [
+        "gcp",
+        "google cloud",
+        "bigquery",
+        "gke",
+        "google cloud platform"
+      ],
+      "category": "technical",
+      "domain": "cloud",
+      "difficulty": 3.0
+    },
+    {
+      "id": "CLOUD_AZURE",
+      "name": "Azure",
+      "aliases": [
+        "microsoft azure",
+        "azure cloud",
+        "azure devops",
+        "azure services"
+      ],
+      "category": "technical",
+      "domain": "cloud",
+      "difficulty": 3.0
+    },
+    {
+      "id": "DEVOPS_DOCKER",
+      "name": "Docker",
+      "aliases": [
+        "docker",
+        "containerization",
+        "docker containers",
+        "dockerfile",
+        "docker compose"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 2.5
+    },
+    {
+      "id": "DEVOPS_K8S",
+      "name": "Kubernetes",
+      "aliases": [
+        "k8s",
+        "kubernetes",
+        "kubectl",
+        "kubernetes orchestration",
+        "helm"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 3.5
+    },
+    {
+      "id": "DEVOPS_CICD",
+      "name": "CI/CD",
+      "aliases": [
+        "ci/cd",
+        "continuous integration",
+        "continuous deployment",
+        "github actions",
+        "jenkins",
+        "gitlab ci",
+        "cicd",
+        "devops pipeline"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 3.0
+    },
+    {
+      "id": "DEVOPS_TERRAFORM",
+      "name": "Terraform",
+      "aliases": [
+        "terraform",
+        "infrastructure as code",
+        "iac",
+        "hashicorp terraform"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 3.5
+    },
+    {
+      "id": "DEVOPS_GIT",
+      "name": "Git",
+      "aliases": [
+        "git",
+        "version control",
+        "github",
+        "gitlab",
+        "bitbucket",
+        "git workflow"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 1.5
+    },
+    {
+      "id": "DEVOPS_LINUX",
+      "name": "Linux",
+      "aliases": [
+        "linux",
+        "unix",
+        "ubuntu",
+        "centos",
+        "debian",
+        "linux administration",
+        "linux server"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 2.0
+    },
+    {
+      "id": "SEC_BASICS",
+      "name": "Cybersecurity Fundamentals",
+      "aliases": [
+        "cybersecurity",
+        "information security",
+        "infosec",
+        "security fundamentals",
+        "network security"
+      ],
+      "category": "technical",
+      "domain": "security",
+      "difficulty": 2.5
+    },
+    {
+      "id": "SEC_APPSEC",
+      "name": "Application Security",
+      "aliases": [
+        "appsec",
+        "application security",
+        "owasp",
+        "secure coding",
+        "sast",
+        "vulnerability"
+      ],
+      "category": "technical",
+      "domain": "security",
+      "difficulty": 3.5
+    },
+    {
+      "id": "PM_AGILE",
+      "name": "Agile Methodology",
+      "aliases": [
+        "agile",
+        "scrum",
+        "kanban",
+        "agile development",
+        "sprint planning",
+        "agile scrum",
+        "sprint"
+      ],
+      "category": "domain",
+      "domain": "management",
+      "difficulty": 2.0
+    },
+    {
+      "id": "PM_PRODUCT",
+      "name": "Product Management",
+      "aliases": [
+        "product management",
+        "product owner",
+        "product strategy",
+        "roadmapping",
+        "product roadmap"
+      ],
+      "category": "domain",
+      "domain": "management",
+      "difficulty": 3.0
+    },
+    {
+      "id": "SOFT_COMM",
+      "name": "Communication",
+      "aliases": [
+        "communication skills",
+        "verbal communication",
+        "written communication",
+        "presentation skills",
+        "public speaking"
+      ],
+      "category": "soft",
+      "domain": "soft_skills",
+      "difficulty": 1.0
+    },
+    {
+      "id": "SOFT_LEAD",
+      "name": "Leadership",
+      "aliases": [
+        "leadership",
+        "team leadership",
+        "people management",
+        "team lead",
+        "tech lead",
+        "mentoring"
+      ],
+      "category": "soft",
+      "domain": "soft_skills",
+      "difficulty": 2.5
+    },
+    {
+      "id": "SOFT_COLLAB",
+      "name": "Collaboration",
+      "aliases": [
+        "collaboration",
+        "teamwork",
+        "cross-functional",
+        "stakeholder management",
+        "team player"
+      ],
+      "category": "soft",
+      "domain": "soft_skills",
+      "difficulty": 1.0
+    },
+    {
+      "id": "SOFT_PROB",
+      "name": "Problem Solving",
+      "aliases": [
+        "problem solving",
+        "analytical thinking",
+        "critical thinking",
+        "troubleshooting",
+        "debugging"
+      ],
+      "category": "soft",
+      "domain": "soft_skills",
+      "difficulty": 1.5
+    },
+    {
+      "id": "ARCH_SYSTEM",
+      "name": "System Design",
+      "aliases": [
+        "system design",
+        "distributed systems",
+        "high availability",
+        "scalability",
+        "architecture design",
+        "software architecture",
+        "microservices"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 4.0
+    },
+    {
+      "id": "ALGO_DS",
+      "name": "Data Structures & Algorithms",
+      "aliases": [
+        "data structures",
+        "algorithms",
+        "dsa",
+        "leetcode",
+        "computational complexity",
+        "big o notation"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 3.0
+    },
+    {
+      "id": "TEST_UNIT",
+      "name": "Unit Testing",
+      "aliases": [
+        "unit testing",
+        "test driven development",
+        "tdd",
+        "pytest",
+        "jest",
+        "junit",
+        "testing",
+        "test driven"
+      ],
+      "category": "technical",
+      "domain": "software_engineering",
+      "difficulty": 2.0
+    },
+    {
+      "id": "OPS_MONITOR",
+      "name": "Monitoring & Observability",
+      "aliases": [
+        "monitoring",
+        "observability",
+        "prometheus",
+        "grafana",
+        "datadog",
+        "logging",
+        "tracing"
+      ],
+      "category": "technical",
+      "domain": "devops",
+      "difficulty": 2.5
+    },
+    {
+      "id": "FINANCE_MODEL",
+      "name": "Financial Modeling",
+      "aliases": [
+        "financial modeling",
+        "financial analysis",
+        "dcf",
+        "valuation",
+        "financial forecasting"
+      ],
+      "category": "domain",
+      "domain": "finance",
+      "difficulty": 3.0
+    },
+    {
+      "id": "FINANCE_EXCEL",
+      "name": "Excel",
+      "aliases": [
+        "microsoft excel",
+        "excel",
+        "spreadsheets",
+        "pivot tables",
+        "excel modeling",
+        "vlookup"
+      ],
+      "category": "tool",
+      "domain": "finance",
+      "difficulty": 1.5
+    },
+    {
+      "id": "MKT_DIGITAL",
+      "name": "Digital Marketing",
+      "aliases": [
+        "digital marketing",
+        "online marketing",
+        "seo",
+        "sem",
+        "ppc",
+        "google ads",
+        "social media marketing"
+      ],
+      "category": "domain",
+      "domain": "marketing",
+      "difficulty": 2.0
+    },
+    {
+      "id": "OPS_SUPPLY",
+      "name": "Supply Chain Management",
+      "aliases": [
+        "supply chain",
+        "logistics",
+        "procurement",
+        "inventory management",
+        "warehouse management",
+        "inventory"
+      ],
+      "category": "domain",
+      "domain": "operations",
+      "difficulty": 2.5
+    },
+    {
+      "id": "DS_EDA",
+      "name": "Exploratory Data Analysis",
+      "aliases": [
+        "eda",
+        "exploratory data analysis",
+        "data exploration",
+        "data profiling",
+        "statistical eda"
+      ],
+      "category": "technical",
+      "domain": "data_science",
+      "difficulty": 2.5
+    }
+  ],
+  "prerequisites": [
+    {
+      "from": "PROG_PY",
+      "to": "ML_PANDAS",
+      "weight": 0.95
+    },
+    {
+      "from": "PROG_PY",
+      "to": "ML_NUMPY",
+      "weight": 0.95
+    },
+    {
+      "from": "PROG_PY",
+      "to": "ML_SKLEARN",
+      "weight": 0.9
+    },
+    {
+      "from": "PROG_PY",
+      "to": "WEB_DJANGO",
+      "weight": 0.9
+    },
+    {
+      "from": "PROG_PY",
+      "to": "WEB_FLASK",
+      "weight": 0.9
+    },
+    {
+      "from": "PROG_PY",
+      "to": "WEB_FASTAPI",
+      "weight": 0.9
+    },
+    {
+      "from": "PROG_PY",
+      "to": "DATA_ENG",
+      "weight": 0.8
+    },
+    {
+      "from": "ML_NUMPY",
+      "to": "ML_PANDAS",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_NUMPY",
+      "to": "ML_SKLEARN",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_NUMPY",
+      "to": "ML_TF",
+      "weight": 0.9
+    },
+    {
+      "from": "ML_NUMPY",
+      "to": "ML_TORCH",
+      "weight": 0.9
+    },
+    {
+      "from": "ML_PANDAS",
+      "to": "DS_EDA",
+      "weight": 0.9
+    },
+    {
+      "from": "ML_PANDAS",
+      "to": "DATA_VIZ",
+      "weight": 0.75
+    },
+    {
+      "from": "ML_STATS",
+      "to": "ML_PROB",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_STATS",
+      "to": "ML_SKLEARN",
+      "weight": 0.8
+    },
+    {
+      "from": "ML_PROB",
+      "to": "ML_DL",
+      "weight": 0.8
+    },
+    {
+      "from": "ML_SKLEARN",
+      "to": "ML_FEATURE",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_SKLEARN",
+      "to": "ML_MLOPs",
+      "weight": 0.75
+    },
+    {
+      "from": "ML_DL",
+      "to": "ML_CV",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_DL",
+      "to": "ML_NLP",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_DL",
+      "to": "ML_NLPBERT",
+      "weight": 0.9
+    },
+    {
+      "from": "ML_TF",
+      "to": "ML_DL",
+      "weight": 0.85
+    },
+    {
+      "from": "ML_TORCH",
+      "to": "ML_DL",
+      "weight": 0.85
+    },
+    {
+      "from": "PROG_JS",
+      "to": "WEB_REACT",
+      "weight": 0.95
+    },
+    {
+      "from": "PROG_JS",
+      "to": "WEB_VUE",
+      "weight": 0.95
+    },
+    {
+      "from": "PROG_JS",
+      "to": "WEB_ANGULAR",
+      "weight": 0.95
+    },
+    {
+      "from": "PROG_JS",
+      "to": "WEB_NODE",
+      "weight": 0.9
+    },
+    {
+      "from": "WEB_REACT",
+      "to": "WEB_NEXT",
+      "weight": 0.9
+    },
+    {
+      "from": "WEB_HTML",
+      "to": "WEB_CSS",
+      "weight": 0.85
+    },
+    {
+      "from": "WEB_HTML",
+      "to": "WEB_REACT",
+      "weight": 0.7
+    },
+    {
+      "from": "PROG_SQL",
+      "to": "DB_PG",
+      "weight": 0.9
+    },
+    {
+      "from": "PROG_SQL",
+      "to": "DB_MYSQL",
+      "weight": 0.9
+    },
+    {
+      "from": "PROG_SQL",
+      "to": "DATA_ENG",
+      "weight": 0.85
+    },
+    {
+      "from": "DB_DESIGN",
+      "to": "DB_PG",
+      "weight": 0.8
+    },
+    {
+      "from": "DEVOPS_DOCKER",
+      "to": "DEVOPS_K8S",
+      "weight": 0.9
+    },
+    {
+      "from": "DEVOPS_GIT",
+      "to": "DEVOPS_CICD",
+      "weight": 0.85
+    },
+    {
+      "from": "DEVOPS_LINUX",
+      "to": "DEVOPS_DOCKER",
+      "weight": 0.75
+    },
+    {
+      "from": "DEVOPS_LINUX",
+      "to": "PROG_BASH",
+      "weight": 0.85
+    },
+    {
+      "from": "DATA_ENG",
+      "to": "DATA_SPARK",
+      "weight": 0.85
+    },
+    {
+      "from": "DATA_ENG",
+      "to": "DATA_KAFKA",
+      "weight": 0.8
+    },
+    {
+      "from": "DATA_ENG",
+      "to": "DATA_AIRFLOW",
+      "weight": 0.8
+    },
+    {
+      "from": "CLOUD_AWS",
+      "to": "DEVOPS_TERRAFORM",
+      "weight": 0.75
+    },
+    {
+      "from": "ALGO_DS",
+      "to": "ARCH_SYSTEM",
+      "weight": 0.8
+    }
+  ],
+  "dataset_enriched": true,
+  "enrichment_sources": [
+    "Kaggle Resume Dataset — kaggle.com/datasets/snehaanbhawal/resume-dataset",
+    "Kaggle JD Dataset — kaggle.com/datasets/kshitizregmi/jobs-and-job-description",
+    "O*NET Database 28.1 — onetcenter.org/db_releases.html"
+  ]
 }

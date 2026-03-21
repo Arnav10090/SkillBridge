@@ -18,7 +18,7 @@ async def _call_ollama(prompt: str, system: str, temperature: float) -> str:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
-    async with httpx.AsyncClient(timeout=120.0) as client:
+    async with httpx.AsyncClient(timeout=300.0) as client:
         resp = await client.post(
             f"{settings.OLLAMA_BASE_URL}/api/chat",
             json={

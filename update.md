@@ -685,7 +685,28 @@ All available at `http://localhost:8000`:
 
 ---
 
-## 16. What Still Needs to Be Done
+## 16. Dataset Integration (Completed)
+
+### Kaggle Resume Dataset (Resume.csv)
+- 2,484 resumes processed across 24 job categories
+- Top categories: INFORMATION-TECHNOLOGY (120), BUSINESS-DEVELOPMENT (120)
+- Mined real-world skill surface forms → 11 new aliases added to skill_taxonomy.json
+- Script: `backend/scripts/process_datasets.py`
+
+### Kaggle JD Dataset (job_title_des.csv)
+- 2,277 job descriptions processed
+- Top demanded skills: JavaScript (979 JDs), SQL (798), HTML (713), CSS (668), Git (628)
+- Demand weights computed → stored in skill_frequency_stats.json
+- Weights integrated into WGT P-Score via DEMAND_WEIGHTS in wgt_engine.py
+
+### Generated Evidence Files (committed to git)
+- backend/app/data/skill_frequency_stats.json
+- backend/app/data/dataset_report.json
+- backend/app/data/skill_taxonomy.json (enriched)
+
+---
+
+## 17. What Still Needs to Be Done
 
 1. **Demo Video** — 2-3 minute screen recording of full user journey (upload → processing → dashboard → roadmap → trace drawer)
 2. **GitHub Push** — Push to public repository with clean commit history
@@ -693,7 +714,7 @@ All available at `http://localhost:8000`:
 
 ---
 
-## 17. Key Design Decisions
+## 18. Key Design Decisions
 
 1. **SQLite over PostgreSQL** — Zero setup, works anywhere, sufficient for hackathon scale
 2. **Closed course catalog** — Prevents all LLM hallucination in recommendations

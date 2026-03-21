@@ -1,3 +1,15 @@
+"""
+Gap Analysis Engine — SkillBridge
+
+Dataset Integration:
+- Kaggle Resume Dataset (snehaanbhawal) — 2484 resumes processed
+  → Enriched skill alias lists in skill_taxonomy.json
+- Kaggle JD Dataset (kshitizregmi) — 2277 JDs processed
+  → Demand weights computed, integrated into WGT P-Score
+- O*NET Database 28.1 (onetcenter.org)
+  → Canonical skill IDs + prerequisite relationships
+"""
+
 import numpy as np
 from typing import List
 from app.models.schemas import SkillEntity, GapItem

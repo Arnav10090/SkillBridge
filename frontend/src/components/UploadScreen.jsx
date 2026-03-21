@@ -115,7 +115,7 @@ export default function UploadScreen() {
             const { job_id } = await analyzeDocuments(resumeFile, jdFile)
             setJobId(job_id)
             let attempts = 0
-            while (attempts < 120) {
+            while (attempts < 240) {
                 await new Promise(r => setTimeout(r, 2000))
                 const status = await pollStatus(job_id)
                 setProgress(status.progress, status.message)

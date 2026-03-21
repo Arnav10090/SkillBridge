@@ -128,12 +128,11 @@ Skills are then ordered via **Kahn's topological sort** with P-score tie-breakin
 | NetworkX | Skill dependency DAG |
 
 ### Datasets & Ontologies
-| Dataset | Source | Usage |
-|---|---|---|
-| O*NET Database 28.1 | onetcenter.org | Canonical skill IDs + prerequisites |
-| Resume Dataset | Kaggle (snehaanbhawal) | NER validation + extraction testing |
-| Jobs & Job Descriptions | Kaggle (kshitizregmi) | JD parser validation |
-| Custom Course Catalog | Team-built (58 modules) | Anti-hallucination anchor |
+| Dataset | Source | Rows Processed | Usage |
+|---|---|---|---|
+| Kaggle Resume Dataset | [snehaanbhawal](https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset/data) | **2,484 resumes** | Enriched 11 skill aliases in taxonomy |
+| Kaggle JD Dataset | [kshitizregmi](https://www.kaggle.com/datasets/kshitizregmi/jobs-and-job-description) | **2,277 JDs** | Computed demand weights for WGT P-Score |
+| O*NET Database 28.1 | [onetcenter.org](https://www.onetcenter.org/db_releases.html) | Full database | Canonical skill IDs + prerequisite graph |
 
 ---
 

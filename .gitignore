@@ -84,3 +84,6 @@ coverage.xml
 # ── Sentence Transformers Cache ───────────────────────────────────────────────
 .cache/
 ~/.cache/huggingface/
+
+# Dataset CSVs (too large for GitHub, processed outputs are committed instead)
+backend/app/datasets/

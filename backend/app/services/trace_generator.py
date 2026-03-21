@@ -26,46 +26,31 @@ FALLBACK_TRACE = (
 )
 
 
-async def generate_trace(step: LearningStep, closest_match: str = "") -> str:
-    """Generate reasoning trace for a single learning step."""
+async def generate_trace(step, closest_match: str = "") -> str:
+    """
+    Generate reasoning trace using smart template.
+    LLM traces are skipped to keep analysis under 60 seconds.
+    """
     if not step.modules:
         return f"No course module found for {step.skill_name}. Consider self-study resources."
 
     module = step.modules[0]
 
-    try:
-        prompt = TRACE_PROMPT.format(
-            skill_name=step.skill_name,
-            gap_type=step.gap_type,
-            coverage_score=round(step.coverage_score, 2),
-            requirement_type=step.skill_category,
-            closest_match=closest_match or "none found",
-            module_title=module.title,
-            provider=module.provider,
-            hours=module.duration_hours,
-            difficulty=module.difficulty,
-            is_implied=step.is_implied_prereq
-        )
-        trace = await call_llm(prompt, system=TRACE_SYSTEM, temperature=0.2)
-        trace = trace.strip().strip('"').strip("'")
+    gap_desc = "is not present" if step.gap_type == "missing" else "needs strengthening"
+    prereq_note = " This is a prerequisite skill needed before advancing." if step.is_implied_prereq else ""
+    coverage_pct = round(step.coverage_score * 100)
+    demand = "requires" if step.gap_type == "missing" else "expects stronger proficiency in"
 
-        # Validate: must mention skill name and module title
-        if step.skill_name.lower() not in trace.lower():
-            raise ValueError("Trace missing skill name")
-        if len(trace) < 40:
-            raise ValueError("Trace too short")
+    trace = (
+        f"Your resume shows {coverage_pct}% coverage of {step.skill_name} "
+        f"— this skill {gap_desc} at the required level. "
+        f"The target role {demand} this skill"
+        f"{' (auto-added as a prerequisite)' if step.is_implied_prereq else ''}. "
+        f'"{module.title}" ({module.duration_hours}h, {module.provider}) '
+        f"directly addresses this gap with difficulty level {module.difficulty}/5.{prereq_note}"
+    )
 
-        return trace
-
-    except Exception as e:
-        print(f"[Trace] LLM failed for {step.skill_name}: {e}, using fallback")
-        return FALLBACK_TRACE.format(
-            skill_name=step.skill_name,
-            coverage=round(step.coverage_score * 100),
-            req_type="requires" if step.gap_type == "missing" else "expects stronger",
-            module_title=module.title,
-            hours=module.duration_hours
-        )
+    return trace
 
 
 async def generate_all_traces(

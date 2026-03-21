@@ -1,0 +1,136 @@
+{
+  "status": "success",
+  "datasets_used": [
+    {
+      "name": "Kaggle Resume Dataset",
+      "source": "https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset",
+      "file": "Resume.csv",
+      "columns": [
+        "ID",
+        "Resume_str",
+        "Resume_html",
+        "Category"
+      ],
+      "rows_processed": 2484,
+      "how_used": "Mined real-world skill surface forms; enriched alias lists in skill_taxonomy.json"
+    },
+    {
+      "name": "Kaggle Jobs and Job Description Dataset",
+      "source": "https://www.kaggle.com/datasets/kshitizregmi/jobs-and-job-description",
+      "file": "job_title_des.csv",
+      "columns": [
+        "Job Title",
+        "Job Description"
+      ],
+      "rows_processed": 2277,
+      "how_used": "Computed skill demand weights from JD frequency; informs P-score weighting in WGT algorithm"
+    },
+    {
+      "name": "O*NET Database 28.1",
+      "source": "https://www.onetcenter.org/db_releases.html",
+      "how_used": "Canonical skill IDs, prerequisite relationships, domain classifications in skill_taxonomy.json"
+    }
+  ],
+  "processing_results": {
+    "resumes_analyzed": 2484,
+    "jds_analyzed": 2277,
+    "new_aliases_added": 11,
+    "skills_with_data": 57
+  },
+  "top_resume_skills": [
+    [
+      "SOFT_LEAD",
+      1065
+    ],
+    [
+      "OPS_SUPPLY",
+      987
+    ],
+    [
+      "FINANCE_EXCEL",
+      960
+    ],
+    [
+      "SOFT_PROB",
+      722
+    ],
+    [
+      "SOFT_COMM",
+      676
+    ],
+    [
+      "OPS_MONITOR",
+      417
+    ],
+    [
+      "SOFT_COLLAB",
+      393
+    ],
+    [
+      "PROG_SQL",
+      191
+    ],
+    [
+      "ML_STATS",
+      168
+    ],
+    [
+      "WEB_HTML",
+      157
+    ]
+  ],
+  "top_jd_skills": [
+    [
+      "PROG_JS",
+      979
+    ],
+    [
+      "PROG_SQL",
+      798
+    ],
+    [
+      "WEB_HTML",
+      713
+    ],
+    [
+      "WEB_CSS",
+      668
+    ],
+    [
+      "DEVOPS_GIT",
+      628
+    ],
+    [
+      "PROG_PY",
+      547
+    ],
+    [
+      "PROG_JAVA",
+      536
+    ],
+    [
+      "SOFT_PROB",
+      489
+    ],
+    [
+      "PM_AGILE",
+      487
+    ],
+    [
+      "SOFT_COMM",
+      466
+    ]
+  ],
+  "skill_demand_weights_sample": {
+    "PROG_JS": 0.594,
+    "PROG_SQL": 0.5223,
+    "WEB_HTML": 0.5002,
+    "WEB_CSS": 0.4968,
+    "DEVOPS_GIT": 0.4906,
+    "PROG_PY": 0.4633,
+    "PROG_JAVA": 0.4566,
+    "PM_AGILE": 0.4364,
+    "CLOUD_AWS": 0.4279,
+    "DB_MYSQL": 0.4238
+  }
+}
