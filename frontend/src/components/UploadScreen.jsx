@@ -187,7 +187,7 @@ export default function UploadScreen() {
                         </h1>
                         <p style={{ color: 'rgba(148,163,184,0.75)', fontSize: 16, lineHeight: 1.7, maxWidth: 480, margin: '0 auto' }}>
                             Upload your resume and a job description. Our AI analyzes skill gaps
-                            and generates a prioritized roadmap in under 30 seconds.
+                            and generates a prioritized roadmap in under 100 seconds.
                         </p>
                     </div>
 
@@ -235,7 +235,7 @@ export default function UploadScreen() {
                     {/* Feature pills */}
                     <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 24, flexWrap: 'wrap' }} className="animate-fade-up delay-400">
                         {[
-                            ['⚡', 'Under 30 seconds'],
+                            ['⚡', 'Under 100 seconds'],
                             ['🎯', 'Zero hallucinations'],
                             ['🔍', 'Full reasoning traces'],
                             ['📊', 'WGT algorithm'],

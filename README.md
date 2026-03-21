@@ -12,7 +12,7 @@ Corporate onboarding suffers from a one-size-fits-all problem:
 - Beginners get overwhelmed by advanced modules
 - No one measures the actual gap between hire capabilities and role requirements
 
-**SkillBridge solves this** by generating a personalized learning pathway in under 30 seconds using AI.
+**SkillBridge solves this** by generating a personalized learning pathway in under 100 seconds using AI.
 
 ---
 
