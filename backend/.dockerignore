@@ -1,0 +1,68 @@
+# ── Virtual Environment ───────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+
+# ── Python Artifacts ──────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# ── Environment Variables (secrets must NOT be baked into the image) ──────────
+.env
+.env.local
+.env.docker
+*.env
+
+# ── Database Files ────────────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+skillbridge.db
+
+# ── Tests & Coverage ─────────────────────────────────────────────────────────
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ── Scripts (dev-only) ───────────────────────────────────────────────────────
+scripts/
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── ML Models / Large Files ──────────────────────────────────────────────────
+models/
+*.gguf
+*.bin
+*.pt
+*.pth
+*.onnx
+
+# ── Uploads / Temp ───────────────────────────────────────────────────────────
+uploads/
+temp/
+tmp/
+*.tmp
+
+# ── Datasets (large CSVs) ───────────────────────────────────────────────────
+app/datasets/
+
+# ── OS / IDE ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Git ──────────────────────────────────────────────────────────────────────
+.git/
+.gitignore
