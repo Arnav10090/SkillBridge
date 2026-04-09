@@ -1,6 +1,5 @@
 # ⚡ SkillBridge — AI-Adaptive Onboarding Engine
-
-> **ARTPARK CodeForge Hackathon Submission**  
+  
 > An AI-driven system that analyzes a candidate's resume against a job description, identifies precise skill gaps, and generates a personalized, prioritized learning roadmap.
 
 ---
@@ -284,12 +283,6 @@ skillbridge/
 
 ---
 
-## 👥 Team
-
-**AI Apex - ARTPARK CodeForge Hackathon — 2026**
-
----
-
 ## 📄 License
 
-MIT License — built for ARTPARK CodeForge Hackathon
+MIT License
