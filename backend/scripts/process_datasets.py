@@ -50,7 +50,7 @@ MINING_PATTERNS = {
     "ML_PANDAS":     ["pandas", "dataframe", "data wrangling"],
     "ML_NUMPY":      ["numpy", "numerical python"],
     "ML_DL":         ["deep learning", "neural network", "neural networks", "cnn", "rnn", "lstm"],
-    "ML_NLP":        ["nlp", "natural language processing", "text mining", "spacy", "nltk"],
+    "ML_NLP":        ["nlp", "natural language processing", "text mining", "nltk"],
     "ML_CV":         ["computer vision", "image processing", "object detection", "opencv"],
     "ML_STATS":      ["statistics", "statistical analysis", "statistical modeling"],
     "ML_PROB":       ["probability", "bayesian", "bayesian statistics"],
