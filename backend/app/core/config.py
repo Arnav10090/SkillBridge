@@ -16,9 +16,18 @@ class Settings(BaseSettings):
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "mistral"
 
-    EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
+    EMBEDDING_DIMENSIONS: int = 384
     SIMILARITY_THRESHOLD: float = 0.62
     SECRET_KEY: str = "dev-secret-key-change-in-production"
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def normalize_database_url(cls, value):
+        if not value:
+            return "sqlite:///./skillbridge.db"
+        if isinstance(value, str) and value.startswith("postgres://"):
+            return value.replace("postgres://", "postgresql://", 1)
+        return value
 
     @field_validator("DEBUG", mode="before")
     @classmethod

@@ -49,7 +49,7 @@ Upload a resume (PDF/DOCX) + job description (PDF/TXT) → get a fully personali
        │
 ┌──────▼──────────────────────────────────────────────────┐
 │                    AI / ML LAYER                        │
-│  Parser (LLM + aliases)  →  Gap Analyzer (FAISS)       │
+│  Parser (LLM + aliases)  →  Gap Analyzer               │
 │  WGT Algorithm (NetworkX)  →  Trace Generator (LLM)    │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -73,8 +73,8 @@ Layer 2 — Skill Family Match
   Prevents false gaps from skill variant naming
 
 Layer 3 — Semantic Similarity (cosine)
-  Embed all skill names with all-MiniLM-L6-v2 (384-dim)
-  FAISS IndexFlatIP similarity search
+  Embed all skill names with local 384-dim hashing vectors
+  Cosine similarity search
   score ≥ 0.62 → weak gap
   score < 0.62 → missing gap
 ```
@@ -121,8 +121,7 @@ Skills are then ordered via **Kahn's topological sort** with P-score tie-breakin
 | Model / Library | Purpose |
 |---|---|
 | Mistral-7B-Instruct (Ollama) or GPT-4o-mini | Skill extraction + reasoning traces |
-| all-MiniLM-L6-v2 (sentence-transformers) | 384-dim skill embeddings |
-| FAISS (faiss-cpu) | Vector similarity search |
+| Local hashing vectors | 384-dim skill-name similarity |
 | NetworkX | Skill dependency DAG |
 
 ### Datasets & Ontologies

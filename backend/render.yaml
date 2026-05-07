@@ -16,8 +16,8 @@ services:
         sync: false
       - key: GROQ_MODEL
         value: llama-3.1-8b-instant
-      - key: EMBEDDING_MODEL
-        value: all-MiniLM-L6-v2
+      - key: EMBEDDING_DIMENSIONS
+        value: "384"
       - key: SIMILARITY_THRESHOLD
         value: "0.62"
       - key: DEBUG

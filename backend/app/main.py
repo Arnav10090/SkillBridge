@@ -12,10 +12,7 @@ async def lifespan(app: FastAPI):
     log.info("Starting SkillBridge API", version=settings.APP_VERSION)
     Base.metadata.create_all(bind=engine)
     log.info("Database tables created/verified")
-
-    from app.services.embeddings import get_embedding_service
-    get_embedding_service()
-    log.info("Embedding model loaded", model=settings.EMBEDDING_MODEL)
+    log.info("Startup complete")
 
     yield
 
