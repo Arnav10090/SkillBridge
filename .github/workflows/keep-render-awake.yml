@@ -1,0 +1,28 @@
+name: Keep Render Backend Awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Ping backend health endpoint
+        env:
+          HEALTH_URL: ${{ vars.RENDER_HEALTH_URL || 'https://skillbridge-9mex.onrender.com/health' }}
+        run: |
+          echo "Pinging ${HEALTH_URL}"
+          curl --fail --show-error --silent --location \
+            --connect-timeout 15 \
+            --max-time 90 \
+            --retry 3 \
+            --retry-delay 10 \
+            --retry-all-errors \
+            "${HEALTH_URL}"
