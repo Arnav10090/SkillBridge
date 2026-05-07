@@ -2,9 +2,10 @@ services:
   - type: web
     name: skillbridge-api
     runtime: python
+    rootDir: backend
     region: oregon
     plan: free
-    buildCommand: pip install -r requirements.txt && python -m download en_core_web_lg
+    buildCommand: python -m pip install --upgrade pip setuptools wheel && python -m pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
@@ -24,4 +25,4 @@ services:
       - key: SECRET_KEY
         sync: false
       - key: PYTHON_VERSION
-        value: "3.11.0"
+        value: "3.11.11"

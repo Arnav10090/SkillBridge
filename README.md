@@ -25,7 +25,7 @@ Upload a resume (PDF/DOCX) + job description (PDF/TXT) → get a fully personali
 
 | Feature | Description |
 |---|---|
-| 🤖 Intelligent Parsing | Hybrid LLM + NER + alias extraction from resume & JD |
+| 🤖 Intelligent Parsing | Hybrid LLM + alias extraction from resume & JD |
 | 📊 Skill Gap Analysis | 3-layer comparison: exact match → skill family → cosine similarity |
 | 🗺️ Adaptive Pathway | Original WGT (Weighted Graph Traversal) algorithm |
 | 🔍 Reasoning Traces | Every recommendation explained with evidence from your resume |
@@ -49,7 +49,7 @@ Upload a resume (PDF/DOCX) + job description (PDF/TXT) → get a fully personali
        │
 ┌──────▼──────────────────────────────────────────────────┐
 │                    AI / ML LAYER                        │
-│  Parser (LLM + spaCy)  →  Gap Analyzer (FAISS)         │
+│  Parser (LLM + aliases)  →  Gap Analyzer (FAISS)       │
 │  WGT Algorithm (NetworkX)  →  Trace Generator (LLM)    │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -123,7 +123,6 @@ Skills are then ordered via **Kahn's topological sort** with P-score tie-breakin
 | Mistral-7B-Instruct (Ollama) or GPT-4o-mini | Skill extraction + reasoning traces |
 | all-MiniLM-L6-v2 (sentence-transformers) | 384-dim skill embeddings |
 | FAISS (faiss-cpu) | Vector similarity search |
-| spaCy en_core_web_lg | NER validation |
 | NetworkX | Skill dependency DAG |
 
 ### Datasets & Ontologies
@@ -173,8 +172,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Download spaCy model
-python -m spacy download en_core_web_lg
+# No additional NLP model download is required
 
 # Configure environment
 cp .env.example .env
@@ -275,7 +273,7 @@ skillbridge/
 
 | Metric | Target | Approach |
 |---|---|---|
-| Skill Extraction F1 | > 0.82 | Hybrid LLM + alias + NER |
+| Skill Extraction F1 | > 0.82 | Hybrid LLM + alias matching |
 | Gap Detection Recall | > 85% | 3-layer matching pipeline |
 | Pathway Validity | 100% | Topological sort guarantee |
 | Hallucination Rate | < 1% | Closed course catalog |
