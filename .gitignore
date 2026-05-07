@@ -62,7 +62,9 @@ Desktop.ini
 docker-compose.infra.yml
 
 # ── ML Models / Large Files ───────────────────────────────────────────────────
-models/
+/models/
+!backend/app/models/
+!backend/app/models/*.py
 *.gguf
 *.bin
 *.pt

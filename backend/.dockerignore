@@ -39,6 +39,8 @@ logs/
 
 # ── ML Models / Large Files ──────────────────────────────────────────────────
 models/
+!app/models/
+!app/models/*.py
 *.gguf
 *.bin
 *.pt
