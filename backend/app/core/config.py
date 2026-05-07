@@ -4,20 +4,16 @@ from functools import lru_cache
 class Settings(BaseSettings):
     APP_NAME: str = "SkillBridge"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
-    DATABASE_URL: str = "postgresql://skillbridge:skillbridge@localhost:5432/skillbridge_db"
-    REDIS_URL: str = "redis://localhost:6379/0"
+    DATABASE_URL: str = "sqlite:///./skillbridge.db"
 
-    LLM_PROVIDER: str = "ollama"          # "ollama" or "openai"
-    OLLAMA_BASE_URL: str = "http://localhost:11434"
-    OLLAMA_MODEL: str = "mistral"
-    OPENAI_API_KEY: str = ""
-    OPENAI_MODEL: str = "gpt-4o-mini"
+    LLM_PROVIDER: str = "groq"
+    GROQ_API_KEY: str = ""
+    GROQ_MODEL: str = "llama-3.1-8b-instant"
 
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
     SIMILARITY_THRESHOLD: float = 0.62
-
     SECRET_KEY: str = "dev-secret-key-change-in-production"
 
     class Config:

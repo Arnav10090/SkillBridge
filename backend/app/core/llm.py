@@ -1,15 +1,39 @@
-import httpx, json
+import httpx
+import json
 from app.core.config import settings
 
 async def call_llm(prompt: str, system: str = "", temperature: float = 0.1) -> str:
-    """Unified LLM caller — works with Ollama or OpenAI."""
-
-    if settings.LLM_PROVIDER == "ollama":
+    if settings.LLM_PROVIDER == "groq":
+        return await _call_groq(prompt, system, temperature)
+    elif settings.LLM_PROVIDER == "ollama":
         return await _call_ollama(prompt, system, temperature)
-    elif settings.LLM_PROVIDER == "openai":
-        return await _call_openai(prompt, system, temperature)
     else:
         raise ValueError(f"Unknown LLM provider: {settings.LLM_PROVIDER}")
+
+
+async def _call_groq(prompt: str, system: str, temperature: float) -> str:
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        resp = await client.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {settings.GROQ_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": settings.GROQ_MODEL,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": 2048,
+                "response_format": {"type": "json_object"},
+            }
+        )
+        resp.raise_for_status()
+        return resp.json()["choices"][0]["message"]["content"]
 
 
 async def _call_ollama(prompt: str, system: str, temperature: float) -> str:
@@ -30,20 +54,3 @@ async def _call_ollama(prompt: str, system: str, temperature: float) -> str:
         )
         resp.raise_for_status()
         return resp.json()["message"]["content"]
-
-
-async def _call_openai(prompt: str, system: str, temperature: float) -> str:
-    from openai import AsyncOpenAI
-    client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
-    messages = []
-    if system:
-        messages.append({"role": "system", "content": system})
-    messages.append({"role": "user", "content": prompt})
-
-    resp = await client.chat.completions.create(
-        model=settings.OPENAI_MODEL,
-        messages=messages,
-        temperature=temperature,
-        response_format={"type": "json_object"}
-    )
-    return resp.choices[0].message.content
