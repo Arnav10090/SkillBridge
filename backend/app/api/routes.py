@@ -195,8 +195,12 @@ async def run_analysis(
                    resume_text=resume_text[:5000], jd_text=jd_text[:5000])
 
         # ── Stage 2: Parse skills ────────────────────────────────────────
-        resume_skills, exp_years, r_domain = await parse_resume(resume_text)
-        jd_skills, role_title, seniority   = await parse_jd(jd_text)
+        resume_result, jd_result = await asyncio.gather(
+            parse_resume(resume_text),
+            parse_jd(jd_text)
+        )
+        resume_skills, exp_years, r_domain = resume_result
+        jd_skills, role_title, seniority   = jd_result
 
         update_job(JobStatus.ANALYZING, 50, f"Computing skill gaps for {role_title}...")
 

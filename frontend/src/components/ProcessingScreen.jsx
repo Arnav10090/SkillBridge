@@ -95,12 +95,11 @@ export default function ProcessingScreen() {
                                 transition: 'all 0.4s ease',
                                 background: current ? `rgba(${stage.color === '#6366f1' ? '99,102,241' : stage.color === '#8b5cf6' ? '139,92,246' : stage.color === '#06b6d4' ? '6,182,212' : stage.color === '#10b981' ? '16,185,129' : '245,158,11'},0.08)` : 'transparent',
                                 border: current ? `1px solid ${stage.color}30` : '1px solid transparent',
-                                opacity: done ? 0.45 : current ? 1 : 0.25,
                             }}>
                                 <span style={{ fontSize: 18, minWidth: 24, textAlign: 'center' }}>{stage.emoji}</span>
                                 <span style={{
                                     flex: 1, fontSize: 14,
-                                    color: current ? '#e2e8f0' : 'rgba(148,163,184,0.7)',
+                                    color: '#fff',
                                     fontWeight: current ? 500 : 400
                                 }}>{stage.label}</span>
                                 {done && <span style={{ fontSize: 12, color: '#6ee7b7', fontFamily: 'JetBrains Mono' }}>done</span>}

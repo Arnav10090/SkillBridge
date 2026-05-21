@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     GROQ_MODEL: str = "llama-3.1-8b-instant"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "mistral"
+    LLM_TIMEOUT_SECONDS: float = 30.0
+    LLM_PARSE_TIMEOUT_SECONDS: float = 8.0
+    FAST_PARSE_MIN_SKILLS: int = 3
 
     EMBEDDING_DIMENSIONS: int = 384
     SIMILARITY_THRESHOLD: float = 0.62
@@ -36,7 +39,7 @@ class Settings(BaseSettings):
             normalized = value.strip().lower()
             if normalized in {"true", "1", "yes", "y", "on"}:
                 return True
-            if normalized in {"false", "0", "no", "n", "off", "warn", "warning", "info", "error", "critical", ""}:
+            if normalized in {"false", "0", "no", "n", "off", "warn", "warning", "info", "error", "critical", "release", "prod", "production", ""}:
                 return False
         return value
 

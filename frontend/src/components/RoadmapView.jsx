@@ -271,24 +271,25 @@ export default function RoadmapView() {
             </header>
 
             {/* Canvas */}
-            <div style={{ flex: 1, position: 'relative' }}>
-                <ReactFlow
-                    key={filter}
-                    nodes={nodes} edges={edges}
-                    onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
-                    nodeTypes={nodeTypes}
-                    fitView fitViewOptions={{ padding: 0.2 }}
-                    minZoom={0.2} maxZoom={2}
-                    proOptions={{ hideAttribution: true }}
-                >
-                    <Background color="rgba(255,255,255,0.03)" gap={32} size={1} />
-                    <Controls showInteractive={false} />
-                    <MiniMap
-                        nodeColor={n => (n.data?.is_implied ? GAP_STYLE.implied : GAP_STYLE[n.data?.gap_type] || GAP_STYLE.missing).border}
-                        maskColor="rgba(5,5,8,0.88)"
-                        style={{ background: 'rgba(5,5,8,0.9)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12 }}
-                    />
-                </ReactFlow>
+            <div className="w-full overflow-x-auto" style={{ flex: 1, position: 'relative' }}>
+                <div className="h-full min-w-[900px] md:min-w-0" style={{ position: 'relative' }}>
+                    <ReactFlow
+                        key={filter}
+                        nodes={nodes} edges={edges}
+                        onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
+                        nodeTypes={nodeTypes}
+                        fitView fitViewOptions={{ padding: 0.2 }}
+                        minZoom={0.2} maxZoom={2}
+                        proOptions={{ hideAttribution: true }}
+                    >
+                        <Background color="rgba(255,255,255,0.03)" gap={32} size={1} />
+                        <Controls showInteractive={false} />
+                        <MiniMap
+                            nodeColor={n => (n.data?.is_implied ? GAP_STYLE.implied : GAP_STYLE[n.data?.gap_type] || GAP_STYLE.missing).border}
+                            maskColor="rgba(5,5,8,0.88)"
+                            style={{ background: 'rgba(5,5,8,0.9)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12 }}
+                        />
+                    </ReactFlow>
 
                 {/* Legend */}
                 <div style={{ position: 'absolute', bottom: 16, left: 16, zIndex: 20, background: 'rgba(5,5,8,0.9)', border: '1px solid rgba(255,255,255,0.06)', backdropFilter: 'blur(10px)', borderRadius: 12, padding: '10px 14px', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -312,7 +313,8 @@ export default function RoadmapView() {
                 )}
 
                 {/* Trace drawer */}
-                {selectedStep && <TraceDrawer step={selectedStep} onClose={() => setSelectedStep(null)} />}
+                    {selectedStep && <TraceDrawer step={selectedStep} onClose={() => setSelectedStep(null)} />}
+                </div>
             </div>
         </div>
     )

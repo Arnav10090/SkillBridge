@@ -33,14 +33,13 @@ function DropZone({ label, sublabel, icon, file, onDrop, color }) {
 
     return (
         <div
-            {...getRootProps()}
+            {...getRootProps({ className: 'w-full max-w-full px-4 py-11 md:px-6' })}
             style={{
                 background: isDragActive
                     ? `rgba(${color === 'indigo' ? '99,102,241' : '139,92,246'},0.08)`
                     : file ? 'rgba(16,185,129,0.05)' : 'rgba(255,255,255,0.02)',
                 border: `1px solid ${isDragActive ? c.ring : file ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.07)'}`,
                 borderRadius: 24,
-                padding: '44px 24px',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 position: 'relative',
@@ -137,12 +136,10 @@ export default function UploadScreen() {
             <FloatingOrb style={{ width: 350, height: 350, bottom: -80, right: -80, background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)' }} />
 
             {/* Header */}
-            <header style={{
-                padding: '20px 40px',
+            <header className="flex flex-col gap-3 px-4 py-5 md:flex-row md:items-center md:justify-between md:gap-0 md:px-10" style={{
                 borderBottom: '1px solid rgba(255,255,255,0.05)',
                 background: 'rgba(5,5,8,0.6)',
                 backdropFilter: 'blur(20px)',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 position: 'sticky', top: 0, zIndex: 50
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -164,21 +161,16 @@ export default function UploadScreen() {
             </header>
 
             {/* Main — 50/50 split */}
-            <main style={{ flex: 1, display: 'flex', alignItems: 'stretch' }}>
+            <main className="flex flex-col md:flex-row md:items-stretch" style={{ flex: 1 }}>
 
                 {/* ── LEFT: Hero — centered ─────────────────────────────── */}
-                <div style={{
+                <div className="flex flex-col items-center justify-center px-4 py-10 md:border-r md:px-[52px] md:py-[60px]" style={{
                     flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     textAlign: 'center',
-                    padding: '60px 52px',
-                    borderRight: '1px solid rgba(255,255,255,0.05)',
+                    borderRightColor: 'rgba(255,255,255,0.05)',
                 }}>
                     {/* Badge */}
-                    <div style={{
+                    <div className="w-full flex-wrap justify-center md:w-auto" style={{
                         display: 'inline-flex', alignItems: 'center', gap: 8,
                         background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)',
                         borderRadius: 24, padding: '6px 16px', marginBottom: 32
@@ -202,7 +194,7 @@ export default function UploadScreen() {
                     </p>
 
                     {/* Feature pills — 2x2 centered grid */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, width: '100%', maxWidth: 420 }}>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2" style={{ width: '100%', maxWidth: 420 }}>
                         {[
                             ['⚡', 'Under 100 seconds', 'Fast async pipeline'],
                             ['🎯', 'Zero hallucinations', 'Closed catalog'],
@@ -225,18 +217,13 @@ export default function UploadScreen() {
                 </div>
 
                 {/* ── RIGHT: Upload zones — larger ─────────────────────── */}
-                <div style={{
+                <div className="flex flex-col items-center justify-center px-4 py-10 md:px-[52px] md:py-[60px]" style={{
                     flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 52px',
                 }}>
                     <div style={{ width: '100%', maxWidth: 560 }}>
 
                         {/* Drop zones */}
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
+                        <div className="grid grid-cols-1 gap-5 md:grid-cols-2" style={{ marginBottom: 24 }}>
                             <div>
                                 <div style={{ fontSize: 13, fontWeight: 600, color: 'rgba(165,180,252,0.7)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12, paddingLeft: 4 }}>
                                     01 · Your Resume
@@ -255,8 +242,9 @@ export default function UploadScreen() {
                         <button
                             onClick={handleAnalyze}
                             disabled={!canAnalyze}
+                            className="w-full px-4 py-5 md:px-8"
                             style={{
-                                width: '100%', padding: '20px 32px', borderRadius: 18,
+                                borderRadius: 18,
                                 border: 'none', cursor: canAnalyze ? 'pointer' : 'not-allowed',
                                 fontSize: 18, fontFamily: 'Syne', fontWeight: 700, letterSpacing: '0.02em',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,

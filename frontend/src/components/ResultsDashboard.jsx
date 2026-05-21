@@ -15,7 +15,7 @@ const DOMAIN_LABELS = {
 
 function StatCard({ icon, label, value, sub, accent }) {
     return (
-        <div style={{
+        <div className="max-w-full min-w-0" style={{
             background: 'rgba(255,255,255,0.02)', border: `1px solid ${accent}25`,
             borderRadius: 16, padding: '20px', position: 'relative', overflow: 'hidden'
         }}>
@@ -101,19 +101,18 @@ export default function ResultsDashboard() {
         <div className="mesh-bg" style={{ minHeight: '100vh', color: '#e2e8f0' }}>
 
             {/* Header */}
-            <header style={{
-                position: 'sticky', top: 0, zIndex: 40, padding: '14px 32px',
+            <header className="flex flex-col gap-3 px-4 py-[14px] md:flex-row md:items-center md:justify-between md:gap-0 md:px-8" style={{
+                position: 'sticky', top: 0, zIndex: 40,
                 background: 'rgba(5,5,8,0.85)', backdropFilter: 'blur(20px)',
                 borderBottom: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between'
             }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div className="min-w-0 flex-wrap" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{ width: 32, height: 32, borderRadius: 9, background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, boxShadow: '0 0 16px rgba(99,102,241,0.4)' }}>⚡</div>
                     <span style={{ fontFamily: 'Syne', fontWeight: 700, color: '#e2e8f0', fontSize: 16 }}>SkillBridge</span>
                     <span style={{ color: 'rgba(100,116,139,0.6)', fontSize: 14 }}>/</span>
                     <span style={{ fontSize: 14, color: 'rgba(148,163,184,0.7)' }}>Analysis Results</span>
                 </div>
-                <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                <div className="w-full flex-wrap justify-between md:w-auto md:justify-start" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                     <button onClick={reset} style={{
                         display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'rgba(148,163,184,0.6)',
                         background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer',
@@ -128,11 +127,11 @@ export default function ResultsDashboard() {
                 </div>
             </header>
 
-            <div style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: 24 }} className="animate-fade-up">
+            <div style={{ maxWidth: 1280, margin: '0 auto' }} className="animate-fade-up flex w-full flex-col gap-6 px-4 py-8 md:px-6">
 
                 {/* Row 1: Stats */}
-                <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr 1fr 1fr 1fr', gap: 16 }}>
-                    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }}>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-[220px_1fr_1fr_1fr_1fr]">
+                    <div className="max-w-full min-w-0" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }}>
                         <ReadinessGauge score={summary?.readiness_score || 0} />
                     </div>
                     <StatCard icon="🔴" label="Missing Skills" value={summary?.missing_skills || 0} accent="#ef4444" />
@@ -142,9 +141,9 @@ export default function ResultsDashboard() {
                 </div>
 
                 {/* Row 2: Charts */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {/* Radar */}
-                    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 }}>
+                    <div className="max-w-full min-w-0 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 }}>
                         <div style={{ fontFamily: 'Syne', fontWeight: 600, fontSize: 15, color: '#e2e8f0', marginBottom: 4 }}>Skill Coverage by Category</div>
                         <div style={{ fontSize: 12, color: 'rgba(100,116,139,0.7)', marginBottom: 16 }}>How well your resume covers each domain</div>
                         <ResponsiveContainer width="100%" height={240}>
@@ -158,7 +157,7 @@ export default function ResultsDashboard() {
                     </div>
 
                     {/* Bar chart */}
-                    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 }}>
+                    <div className="max-w-full min-w-0 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 }}>
                         <div style={{ fontFamily: 'Syne', fontWeight: 600, fontSize: 15, color: '#e2e8f0', marginBottom: 4 }}>Gaps by Domain</div>
                         <div style={{ fontSize: 12, color: 'rgba(100,116,139,0.7)', marginBottom: 16 }}>Number of skill gaps per knowledge domain</div>
                         <ResponsiveContainer width="100%" height={240}>
@@ -175,9 +174,9 @@ export default function ResultsDashboard() {
                 </div>
 
                 {/* Row 3: Skills Comparison */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {/* Resume Skills */}
-                    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 20 }}>
+                    <div className="max-w-full min-w-0" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 20 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                             <div>
                                 <div style={{ fontFamily: 'Syne', fontWeight: 600, color: '#e2e8f0', fontSize: 14 }}>Your Skills</div>
@@ -204,7 +203,7 @@ export default function ResultsDashboard() {
                     </div>
 
                     {/* JD Requirements */}
-                    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(99,102,241,0.12)', borderRadius: 16, padding: 20 }}>
+                    <div className="max-w-full min-w-0" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(99,102,241,0.12)', borderRadius: 16, padding: 20 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                             <div>
                                 <div style={{ fontFamily: 'Syne', fontWeight: 600, color: '#e2e8f0', fontSize: 14 }}>Role Requirements</div>
@@ -233,7 +232,7 @@ export default function ResultsDashboard() {
                     </div>
 
                     {/* Gaps */}
-                    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(245,158,11,0.15)', borderRadius: 16, padding: 20 }}>
+                    <div className="max-w-full min-w-0" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(245,158,11,0.15)', borderRadius: 16, padding: 20 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                             <div>
                                 <div style={{ fontFamily: 'Syne', fontWeight: 600, color: '#e2e8f0', fontSize: 14 }}>Identified Gaps</div>
@@ -241,7 +240,7 @@ export default function ResultsDashboard() {
                             </div>
                             <span style={{ fontSize: 20 }}>⚠️</span>
                         </div>
-                        <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+                        <div className="flex-wrap" style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
                             {['missing', 'weak'].map(t => {
                                 const count = gap_report.filter(g => g.gap_type === t).length
                                 const c = GAP_COLORS[t]
@@ -276,8 +275,8 @@ export default function ResultsDashboard() {
                 </div>
 
                 {/* Row 4: Pathway Preview */}
-                <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+                <div className="max-w-full min-w-0" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 }}>
+                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between" style={{ marginBottom: 20 }}>
                         <div>
                             <div style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 16, color: '#e2e8f0' }}>Learning Pathway Preview</div>
                             <div style={{ fontSize: 12, color: 'rgba(100,116,139,0.6)', marginTop: 2 }}>First 5 steps · ordered by WGT priority score</div>
@@ -293,8 +292,8 @@ export default function ResultsDashboard() {
                             const gc = { missing: '#ef4444', weak: '#f59e0b', overqualified: '#10b981' }
                             const gc2 = { missing: 'rgba(239,68,68,0.08)', weak: 'rgba(245,158,11,0.08)', overqualified: 'rgba(16,185,129,0.08)' }
                             return (
-                                <div key={i} style={{
-                                    display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px',
+                                <div key={i} className="flex flex-col md:flex-row md:items-center" style={{
+                                    gap: 16, padding: '14px 16px',
                                     background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
                                     borderRadius: 12, transition: 'all 0.2s'
                                 }}>

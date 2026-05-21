@@ -120,7 +120,7 @@ Skills are then ordered via **Kahn's topological sort** with P-score tie-breakin
 ### AI / ML
 | Model / Library | Purpose |
 |---|---|
-| Mistral-7B-Instruct (Ollama) or GPT-4o-mini | Skill extraction + reasoning traces |
+| Mistral via local Ollama or Llama 3.1 via Groq | Skill extraction enhancement |
 | Local hashing vectors | 384-dim skill-name similarity |
 | NetworkX | Skill dependency DAG |
 
@@ -141,24 +141,38 @@ Skills are then ordered via **Kahn's topological sort** with P-score tie-breakin
 git clone https://github.com/your-team/skillbridge.git
 cd skillbridge
 
-# 2. Add your OpenAI API key
-# Edit skillbridge/backend/.env.docker
-# Set: OPENAI_API_KEY=sk-your-key-here
+# 2. Create your Docker environment file
+cp backend/.env.docker.example backend/.env.docker
 
-# 3. Start everything
+# 3. Choose an LLM provider in backend/.env.docker
+# Option A: local Ollama (free)
+#   LLM_PROVIDER=ollama
+#   OLLAMA_BASE_URL=http://host.docker.internal:11434
+#   OLLAMA_MODEL=mistral
+#
+# Option B: Groq API (hosted)
+#   LLM_PROVIDER=groq
+#   GROQ_API_KEY=gsk_your_key_here
+#   GROQ_MODEL=llama-3.1-8b-instant
+
+# 4. Start everything
 docker compose up --build
 
-# 4. Open the app
+# 5. Open the app
 # Frontend: http://localhost:3000
 # API Docs: http://localhost:8000/docs
 ```
+
+For Ollama with Docker Desktop on Windows/macOS, keep `OLLAMA_BASE_URL=http://host.docker.internal:11434` so the backend container can reach Ollama running on your host machine. For native Linux Docker, use `http://172.17.0.1:11434` or expose Ollama on an address reachable from Docker.
+
+For Groq, create an API key at https://console.groq.com/keys and paste it into `backend/.env.docker`. Do not commit the real `.env.docker` file.
 
 ### Option B — Local Development
 
 #### Prerequisites
 - Python 3.11+
 - Node.js 18+
-- Ollama (for local LLM) OR OpenAI API key
+- Ollama for local LLM OR a Groq API key
 
 #### Backend Setup
 ```bash
@@ -174,8 +188,9 @@ pip install -r requirements.txt
 # No additional NLP model download is required
 
 # Configure environment
-cp .env.example .env
-# Edit .env — set LLM_PROVIDER and API key
+# Create backend/.env and set the same LLM variables shown in .env.docker.example.
+# For local development, use DATABASE_URL=sqlite:///./skillbridge.db.
+# If using local Ollama without Docker, use OLLAMA_BASE_URL=http://localhost:11434.
 
 # Start server
 uvicorn app.main:app --reload --port 8000
@@ -196,15 +211,29 @@ npm run dev
 # Opens at http://localhost:5173
 ```
 
-#### LLM Setup (Local — Free)
+#### LLM Setup
+
+Local Ollama:
 ```bash
-# Install Ollama from https://ollama.ai
+# Install Ollama from https://ollama.com/download
 ollama pull mistral
 
-# Update backend/.env:
+# If running the backend directly on your machine, use:
 # LLM_PROVIDER=ollama
 # OLLAMA_BASE_URL=http://localhost:11434
 # OLLAMA_MODEL=mistral
+
+# If running with Docker, use:
+# OLLAMA_BASE_URL=http://host.docker.internal:11434
+```
+
+Groq API:
+```bash
+# Create a key at https://console.groq.com/keys
+# Update backend/.env or backend/.env.docker:
+# LLM_PROVIDER=groq
+# GROQ_API_KEY=gsk_your_key_here
+# GROQ_MODEL=llama-3.1-8b-instant
 ```
 
 ---
@@ -235,6 +264,7 @@ skillbridge/
 │   │   │   └── data_loader.py     # Taxonomy + catalog loader
 │   │   └── main.py                # FastAPI app entrypoint
 │   ├── requirements.txt
+│   ├── .env.docker.example
 │   └── Dockerfile
 ├── frontend/
 │   ├── src/

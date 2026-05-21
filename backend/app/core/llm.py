@@ -12,12 +12,15 @@ async def call_llm(prompt: str, system: str = "", temperature: float = 0.1) -> s
 
 
 async def _call_groq(prompt: str, system: str, temperature: float) -> str:
+    if not settings.GROQ_API_KEY:
+        raise ValueError("GROQ_API_KEY is not configured")
+
     messages = []
     if system:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
-    async with httpx.AsyncClient(timeout=60.0) as client:
+    async with httpx.AsyncClient(timeout=settings.LLM_TIMEOUT_SECONDS) as client:
         resp = await client.post(
             "https://api.groq.com/openai/v1/chat/completions",
             headers={
@@ -42,7 +45,7 @@ async def _call_ollama(prompt: str, system: str, temperature: float) -> str:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
-    async with httpx.AsyncClient(timeout=300.0) as client:
+    async with httpx.AsyncClient(timeout=settings.LLM_TIMEOUT_SECONDS) as client:
         resp = await client.post(
             f"{settings.OLLAMA_BASE_URL}/api/chat",
             json={

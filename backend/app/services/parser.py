@@ -1,9 +1,11 @@
 import re
 import json
+import asyncio
 import pdfplumber
 import docx as python_docx
 from typing import Tuple
 from app.core.llm import call_llm
+from app.core.config import settings
 from app.models.schemas import SkillEntity
 from app.services.data_loader import get_skill_aliases_map, get_all_skills
 
@@ -97,13 +99,14 @@ Job Description text:
 # ─── Alias-Based Fallback Extraction ────────────────────────────────────────
 
 def alias_based_extraction(text: str) -> list[dict]:
+    """Fast fallback: scan text for known skill aliases and evidence patterns."""
     alias_map = get_skill_aliases_map()
     all_skills = {s["id"]: s for s in get_all_skills()}
     text_lower = text.lower()
     found = {}
 
     # ── Explicit evidence patterns for soft skills ───────────────
-    EVIDENCE_PATTERNS = {
+    evidence_patterns = {
         "SOFT_PROB": [
             r"leetcode", r"solved \d+", r"problem.{0,10}solv",
             r"algorithms?", r"data structures?", r"dsa", r"competitive"
@@ -117,7 +120,7 @@ def alias_based_extraction(text: str) -> list[dict]:
         ],
     }
 
-    for skill_id, patterns in EVIDENCE_PATTERNS.items():
+    for skill_id, patterns in evidence_patterns.items():
         for pattern in patterns:
             if re.search(pattern, text_lower):
                 skill_data = all_skills.get(skill_id)
@@ -126,19 +129,10 @@ def alias_based_extraction(text: str) -> list[dict]:
                         "name": skill_data["name"],
                         "category": skill_data["category"],
                         "level": "intermediate",
-                        "evidence": f"Pattern '{pattern}' matched in document",
+                        "evidence": f"Matched evidence pattern: {pattern}",
                         "confidence": 0.80
                     }
                 break
-    """
-    Fallback: scan text for known skill aliases.
-    Used when LLM fails or as a cross-check.
-    """
-    alias_map = get_skill_aliases_map()
-    all_skills = {s["id"]: s for s in get_all_skills()}
-    text_lower = text.lower()
-    found = {}
-
     for alias, skill_id in alias_map.items():
         # Word boundary match to avoid partial matches
         pattern = r'\b' + re.escape(alias) + r'\b'
@@ -252,87 +246,130 @@ def safe_parse_json(text: str) -> dict:
     return {"skills": [], "total_experience_years": 0, "primary_domain": "unknown"}
 
 
+async def _call_llm_json(prompt: str, system: str, label: str) -> dict | None:
+    """Call the LLM with a short parsing budget, then return parsed JSON."""
+    try:
+        raw_response = await asyncio.wait_for(
+            call_llm(prompt, system=system, temperature=0.1),
+            timeout=settings.LLM_PARSE_TIMEOUT_SECONDS
+        )
+        return safe_parse_json(raw_response)
+    except asyncio.TimeoutError:
+        print(f"[Parser] {label} LLM parse timed out after {settings.LLM_PARSE_TIMEOUT_SECONDS}s; using fast fallback")
+    except Exception as e:
+        print(f"[Parser] {label} LLM parse failed; using fast fallback: {e}")
+    return None
+
+
+def _infer_experience_years(text: str) -> int:
+    patterns = [
+        r'(\d{1,2})\+?\s*(?:years?|yrs?)\s+(?:of\s+)?experience',
+        r'experience\s*(?:of\s*)?(\d{1,2})\+?\s*(?:years?|yrs?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text, flags=re.IGNORECASE)
+        if match:
+            return int(match.group(1))
+    return 0
+
+
+def _coerce_int(value, default: int = 0) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        match = re.search(r'\d+', str(value or ""))
+        return int(match.group()) if match else default
+
+
+def _infer_role_title(text: str) -> str:
+    for line in text.splitlines()[:12]:
+        clean = line.strip(" \t:-|")
+        if not clean or len(clean) > 90:
+            continue
+        if re.search(r'\b(engineer|developer|scientist|analyst|manager|designer|architect|specialist|consultant|lead)\b', clean, re.IGNORECASE):
+            return clean
+    return "Target Role"
+
+
+def _infer_seniority(text: str) -> str:
+    lowered = text.lower()
+    if re.search(r'\b(lead|principal|staff)\b', lowered):
+        return "lead"
+    if re.search(r'\b(senior|sr\.)\b', lowered):
+        return "senior"
+    if re.search(r'\b(junior|entry[- ]level|intern)\b', lowered):
+        return "junior"
+    return "mid"
+
+
 # ─── Main Parse Functions ─────────────────────────────────────────────────────
 
 async def parse_resume(text: str) -> Tuple[list[SkillEntity], int, str]:
     """
     Returns: (skills, experience_years, primary_domain)
     """
-    try:
+    alias_skills_raw = alias_based_extraction(text)
+    experience_years = _infer_experience_years(text)
+    primary_domain = "general"
+    raw_skills = alias_skills_raw
+
+    parsed = None
+    if len(alias_skills_raw) < settings.FAST_PARSE_MIN_SKILLS:
         prompt = RESUME_USER_PROMPT.format(text=text[:4000])  # Trim to token limit
-        raw_response = await call_llm(prompt, system=RESUME_SYSTEM_PROMPT, temperature=0.1)
-        parsed = safe_parse_json(raw_response)
+        parsed = await _call_llm_json(prompt, RESUME_SYSTEM_PROMPT, "Resume")
+    if parsed:
+        experience_years = _coerce_int(parsed.get("total_experience_years"), experience_years)
+        primary_domain = parsed.get("primary_domain") or primary_domain
+        raw_skills = parsed.get("skills", []) or alias_skills_raw
 
-        experience_years = int(parsed.get("total_experience_years", 0))
-        primary_domain = parsed.get("primary_domain", "general")
-        raw_skills = parsed.get("skills", [])
+    skills = normalize_skills(raw_skills, doc_type="resume", experience_years=experience_years)
 
-        # If LLM returned nothing, fall back to alias scan
-        if not raw_skills:
-            raw_skills = alias_based_extraction(text)
+    # Enrich with alias fallback (adds any skills LLM missed)
+    alias_skills = normalize_skills(alias_skills_raw, doc_type="resume", experience_years=experience_years)
 
-        skills = normalize_skills(raw_skills, doc_type="resume", experience_years=experience_years)
+    # Merge: prefer LLM results, add alias-found skills not already present
+    existing_ids = {s.skill_id for s in skills}
+    for alias_skill in alias_skills:
+        if alias_skill.skill_id not in existing_ids:
+            alias_skill.confidence = 0.70  # Lower confidence for alias-only finds
+            skills.append(alias_skill)
+            existing_ids.add(alias_skill.skill_id)
 
-        # Enrich with alias fallback (adds any skills LLM missed)
-        alias_skills_raw = alias_based_extraction(text)
-        alias_skills = normalize_skills(alias_skills_raw, doc_type="resume", experience_years=experience_years)
-
-        # Merge: prefer LLM results, add alias-found skills not already present
-        existing_ids = {s.skill_id for s in skills}
-        for alias_skill in alias_skills:
-            if alias_skill.skill_id not in existing_ids:
-                alias_skill.confidence = 0.70  # Lower confidence for alias-only finds
-                skills.append(alias_skill)
-                existing_ids.add(alias_skill.skill_id)
-
-        return skills, experience_years, primary_domain
-
-    except Exception as e:
-        print(f"[Parser] LLM parse failed, using alias fallback: {e}")
-        raw_skills = alias_based_extraction(text)
-        skills = normalize_skills(raw_skills, doc_type="resume")
-        return skills, 0, "general"
+    return skills, experience_years, primary_domain
 
 
 async def parse_jd(text: str) -> Tuple[list[SkillEntity], str, str]:
     """
     Returns: (skills, role_title, seniority_level)
     """
-    try:
+    alias_skills_raw = alias_based_extraction(text)
+    for s in alias_skills_raw:
+        s["requirement_type"] = "required"
+
+    role_title = _infer_role_title(text)
+    seniority = _infer_seniority(text)
+    raw_skills = alias_skills_raw
+
+    parsed = None
+    if len(alias_skills_raw) < settings.FAST_PARSE_MIN_SKILLS:
         prompt = JD_USER_PROMPT.format(text=text[:4000])
-        raw_response = await call_llm(prompt, system=JD_SYSTEM_PROMPT, temperature=0.1)
-        parsed = safe_parse_json(raw_response)
+        parsed = await _call_llm_json(prompt, JD_SYSTEM_PROMPT, "JD")
+    if parsed:
+        role_title = parsed.get("role_title") or role_title
+        seniority = parsed.get("seniority_level") or seniority
+        raw_skills = parsed.get("skills", []) or alias_skills_raw
 
-        role_title = parsed.get("role_title", "Unknown Role")
-        seniority = parsed.get("seniority_level", "mid")
-        raw_skills = parsed.get("skills", [])
+    skills = normalize_skills(raw_skills, doc_type="jd")
 
-        if not raw_skills:
-            raw_skills = alias_based_extraction(text)
-            for s in raw_skills:
-                s["requirement_type"] = "required"
+    # Alias fallback enrichment
+    alias_for_enrichment = [dict(s, requirement_type="preferred") for s in alias_skills_raw]
+    alias_skills = normalize_skills(alias_for_enrichment, doc_type="jd")
 
-        skills = normalize_skills(raw_skills, doc_type="jd")
+    existing_ids = {s.skill_id for s in skills}
+    for alias_skill in alias_skills:
+        if alias_skill.skill_id not in existing_ids:
+            alias_skill.confidence = 0.70
+            skills.append(alias_skill)
+            existing_ids.add(alias_skill.skill_id)
 
-        # Alias fallback enrichment
-        alias_skills_raw = alias_based_extraction(text)
-        for s in alias_skills_raw:
-            s["requirement_type"] = "preferred"
-        alias_skills = normalize_skills(alias_skills_raw, doc_type="jd")
-
-        existing_ids = {s.skill_id for s in skills}
-        for alias_skill in alias_skills:
-            if alias_skill.skill_id not in existing_ids:
-                alias_skill.confidence = 0.70
-                skills.append(alias_skill)
-                existing_ids.add(alias_skill.skill_id)
-
-        return skills, role_title, seniority
-
-    except Exception as e:
-        print(f"[Parser] JD LLM parse failed, using alias fallback: {e}")
-        raw_skills = alias_based_extraction(text)
-        for s in raw_skills:
-            s["requirement_type"] = "required"
-        skills = normalize_skills(raw_skills, doc_type="jd")
-        return skills, "Unknown Role", "mid"
+    return skills, role_title, seniority
