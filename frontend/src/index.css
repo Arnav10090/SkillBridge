@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, svg, video, canvas, iframe { max-width: 100%; }
 
 :root {
   --glass: rgba(255,255,255,0.03);

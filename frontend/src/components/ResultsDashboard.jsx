@@ -130,7 +130,7 @@ export default function ResultsDashboard() {
             <div style={{ maxWidth: 1280, margin: '0 auto' }} className="animate-fade-up flex w-full flex-col gap-6 px-4 py-8 md:px-6">
 
                 {/* Row 1: Stats */}
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-[220px_1fr_1fr_1fr_1fr]">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,220px)_1fr_1fr_1fr_1fr]">
                     <div className="max-w-full min-w-0" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }}>
                         <ReadinessGauge score={summary?.readiness_score || 0} />
                     </div>

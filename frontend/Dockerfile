@@ -1,5 +1,4 @@
-# Full corrected Dockerfile:
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /app
 
@@ -7,6 +6,9 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 RUN npm run build
 
 FROM nginx:alpine

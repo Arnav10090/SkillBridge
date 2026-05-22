@@ -100,7 +100,7 @@ function TraceDrawer({ step, onClose }) {
     const style = step.is_implied_prereq ? GAP_STYLE.implied : (GAP_STYLE[step.gap_type] || GAP_STYLE.missing)
     return (
         <div style={{
-            position: 'absolute', top: 0, right: 0, height: '100%', width: 380, zIndex: 30,
+            position: 'absolute', top: 0, right: 0, height: '100%', width: 'min(380px, 100%)', zIndex: 30,
             background: 'rgba(5,5,8,0.97)', borderLeft: '1px solid rgba(255,255,255,0.06)',
             backdropFilter: 'blur(20px)', display: 'flex', flexDirection: 'column', overflow: 'hidden',
             animation: 'fadeIn 0.2s ease-out'
