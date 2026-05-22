@@ -1,13 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
-    chunkSizeWarningLimit: 1000, 
+    chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    exclude: ['lucide-react'], 
-  }
+    exclude: ['lucide-react'],
+  },
+  css: {
+    // prevent autoprefixer from processing node_modules CSS
+    transformer: 'postcss',
+  },
 })
