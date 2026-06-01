@@ -155,6 +155,24 @@ h1, h2, h3, h4, .font-display { font-family: 'Syne', sans-serif; }
 /* React Flow overrides */
 .react-flow__background { background: transparent !important; }
 .react-flow__pane { cursor: grab !important; }
+.react-flow__edges {
+  z-index: 1 !important;
+}
+.react-flow__edge {
+  opacity: 1 !important;
+}
+.react-flow__edge-path {
+  stroke-width: 3px !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+.react-flow__viewport-portal {
+  z-index: 1 !important;
+  pointer-events: none;
+}
+.react-flow__nodes {
+  z-index: 2 !important;
+}
 .react-flow__controls {
   background: rgba(5,5,8,0.9) !important;
   border: 1px solid rgba(255,255,255,0.08) !important;

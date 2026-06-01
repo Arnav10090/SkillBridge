@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
 import useAppStore from '../store/useAppStore'
+
+const STEP_DELAY_MS = 3000
 
 const STAGES = [
     { min: 0, max: 25, label: 'Extracting text from documents', emoji: '📄', color: '#6366f1' },
@@ -10,9 +13,29 @@ const STAGES = [
 ]
 
 export default function ProcessingScreen() {
-    const { progress, statusMessage } = useAppStore()
-    const currentIdx = STAGES.findIndex(s => progress >= s.min && progress < s.max)
-    const activeStage = STAGES[currentIdx] || STAGES[STAGES.length - 1]
+    const { results, setStep } = useAppStore()
+    const [currentStep, setCurrentStep] = useState(0)
+    const [animationComplete, setAnimationComplete] = useState(false)
+    const activeStage = STAGES[currentStep] || STAGES[STAGES.length - 1]
+    const visualProgress = animationComplete ? 100 : Math.round((currentStep / STAGES.length) * 100)
+
+    useEffect(() => {
+        const stepTimers = STAGES.slice(1).map((_, i) => (
+            setTimeout(() => setCurrentStep(i + 1), STEP_DELAY_MS * (i + 1))
+        ))
+        const completeTimer = setTimeout(() => {
+            setAnimationComplete(true)
+        }, STEP_DELAY_MS * STAGES.length)
+
+        return () => {
+            stepTimers.forEach(clearTimeout)
+            clearTimeout(completeTimer)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (results && animationComplete) setStep('results')
+    }, [animationComplete, results, setStep])
 
     return (
         <div className="mesh-bg" style={{
@@ -62,7 +85,7 @@ export default function ProcessingScreen() {
                         Analyzing Your Profile
                     </h2>
                     <p style={{ color: 'rgba(148,163,184,0.7)', fontSize: 15 }}>
-                        {statusMessage || activeStage.label + '...'}
+                        {activeStage.label}...
                     </p>
                 </div>
 
@@ -70,7 +93,7 @@ export default function ProcessingScreen() {
                 <div style={{ marginBottom: 36 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                         <span style={{ fontSize: 13, color: 'rgba(148,163,184,0.6)' }}>Progress</span>
-                        <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono', color: '#a5b4fc', fontWeight: 500 }}>{progress}%</span>
+                        <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono', color: '#a5b4fc', fontWeight: 500 }}>{visualProgress}%</span>
                     </div>
                     <div style={{
                         height: 6, background: 'rgba(255,255,255,0.05)', borderRadius: 99, overflow: 'hidden',
@@ -78,7 +101,7 @@ export default function ProcessingScreen() {
                     }}>
                         <div className="progress-shimmer" style={{
                             height: '100%', borderRadius: 99,
-                            width: `${progress}%`, transition: 'width 0.7s ease-out',
+                            width: `${visualProgress}%`, transition: 'width 0.7s ease-out',
                         }} />
                     </div>
                 </div>
@@ -86,8 +109,8 @@ export default function ProcessingScreen() {
                 {/* Stage list */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {STAGES.map((stage, i) => {
-                        const done = progress >= stage.max
-                        const current = progress >= stage.min && progress < stage.max
+                        const done = i < currentStep
+                        const current = i === currentStep
                         return (
                             <div key={i} style={{
                                 display: 'flex', alignItems: 'center', gap: 12,
@@ -104,14 +127,17 @@ export default function ProcessingScreen() {
                                 }}>{stage.label}</span>
                                 {done && <span style={{ fontSize: 12, color: '#6ee7b7', fontFamily: 'JetBrains Mono' }}>done</span>}
                                 {current && (
-                                    <div style={{ display: 'flex', gap: 3 }}>
-                                        {[0, 1, 2].map(j => (
-                                            <div key={j} style={{
-                                                width: 4, height: 4, borderRadius: '50%', background: stage.color,
-                                                animation: `glow-pulse 1.2s ease-in-out infinite`,
-                                                animationDelay: `${j * 0.2}s`
-                                            }} />
-                                        ))}
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                        <span style={{ fontSize: 11, color: stage.color, fontFamily: 'JetBrains Mono' }}>executing</span>
+                                        <div style={{ display: 'flex', gap: 3 }}>
+                                            {[0, 1, 2].map(j => (
+                                                <div key={j} style={{
+                                                    width: 4, height: 4, borderRadius: '50%', background: stage.color,
+                                                    animation: `glow-pulse 1.2s ease-in-out infinite`,
+                                                    animationDelay: `${j * 0.2}s`
+                                                }} />
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                             </div>

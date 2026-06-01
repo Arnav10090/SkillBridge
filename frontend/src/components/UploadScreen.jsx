@@ -118,6 +118,8 @@ export default function UploadScreen() {
     const handleAnalyze = async () => {
         if (!resumeFile || !jdFile) return
         setLoading(true)
+        setResults(null)
+        setProgress(0, 'Starting analysis...')
         setStep('processing')
         try {
             const { job_id } = await analyzeDocuments(resumeFile, jdFile)
@@ -211,8 +213,12 @@ export default function UploadScreen() {
                     {/* Heading */}
                     <h1 style={{
                         fontFamily: 'Syne', fontWeight: 800, color: '#e2e8f0',
-                        fontSize: isMobile ? '38px' : 'clamp(38px, 4vw, 60px)',
-                        lineHeight: 1.08, marginBottom: 20,
+                        fontSize: isMobile ? 'clamp(30px, 8.8vw, 36px)' : 'clamp(38px, 4vw, 60px)',
+                        lineHeight: 1.22, marginBottom: 18, padding: '8px 0 10px',
+                        maxWidth: '100%', width: '100%',
+                        overflow: 'visible',
+                        overflowWrap: 'normal',
+                        wordBreak: 'normal',
                     }}>
                         Your<br />Personalized<br />
                         <span style={{ background: 'linear-gradient(135deg, #a5b4fc 0%, #818cf8 40%, #c084fc 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Learning Path</span>

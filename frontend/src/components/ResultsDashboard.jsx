@@ -27,13 +27,14 @@ function StatCard({ icon, label, value, sub, accent }) {
     return (
         <div style={{
             background: 'rgba(255,255,255,0.02)', border: `1px solid ${accent}25`,
-            borderRadius: 16, padding: '20px', position: 'relative', overflow: 'hidden',
+            borderRadius: 16, padding: 'clamp(12px, 3vw, 18px)', position: 'relative', overflow: 'hidden',
             minWidth: 0,
+            minHeight: 118,
         }}>
             <div style={{ position: 'absolute', top: -20, right: -20, width: 80, height: 80, borderRadius: '50%', background: `${accent}08`, filter: 'blur(20px)' }} />
-            <div style={{ fontSize: 22, marginBottom: 12 }}>{icon}</div>
-            <div style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 28, color: '#e2e8f0', marginBottom: 4 }}>{value}</div>
-            <div style={{ fontSize: 13, color: 'rgba(148,163,184,0.7)' }}>{label}</div>
+            <div style={{ fontSize: 'clamp(16px, 4vw, 21px)', marginBottom: 10 }}>{icon}</div>
+            <div style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 'clamp(19px, 5.8vw, 28px)', color: '#e2e8f0', marginBottom: 4, lineHeight: 1.05, wordBreak: 'break-word' }}>{value}</div>
+            <div style={{ fontSize: 'clamp(10px, 3vw, 13px)', lineHeight: 1.25, color: 'rgba(148,163,184,0.7)' }}>{label}</div>
             {sub && <div style={{ fontSize: 11, color: 'rgba(100,116,139,0.6)', marginTop: 2 }}>{sub}</div>}
         </div>
     )
@@ -163,16 +164,23 @@ export default function ResultsDashboard() {
                 {/* Row 1: Stats */}
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,220px) 1fr 1fr 1fr 1fr',
+                    gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,220px) minmax(0,1fr)',
                     gap: 16,
                 }}>
                     <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, minWidth: 0 }}>
                         <ReadinessGauge score={summary?.readiness_score || 0} />
                     </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))',
+                        gap: isMobile ? 12 : 16,
+                        minWidth: 0,
+                    }}>
                     <StatCard icon="🔴" label="Missing Skills" value={summary?.missing_skills || 0} accent="#ef4444" />
                     <StatCard icon="🟡" label="Weak Skills" value={summary?.weak_skills || 0} accent="#f59e0b" />
                     <StatCard icon="📚" label="Modules Assigned" value={summary?.total_modules || 0} accent="#6366f1" />
                     <StatCard icon="⏱️" label="Estimated Hours" value={`${summary?.total_hours || 0}h`} accent="#10b981" />
+                    </div>
                 </div>
 
                 {/* Row 2: Charts */}

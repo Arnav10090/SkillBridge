@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react'
 import {
     ReactFlow, Background, Controls, MiniMap,
-    useNodesState, useEdgesState, Handle, Position, MarkerType
+    useNodesState, Handle, Position, ViewportPortal
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 import useAppStore from '../store/useAppStore'
@@ -13,19 +13,44 @@ const GAP_STYLE = {
     overqualified: { border: '#10b981', bg: 'rgba(16,185,129,0.06)', text: '#6ee7b7', glow: '0 0 20px rgba(16,185,129,0.15)' },
 }
 const CAT_COLOR = { technical: '#6366f1', soft: '#10b981', domain: '#f59e0b', tool: '#3b82f6' }
+const NODE_WIDTH = 210
+const NODE_HEIGHT = 100
+const X_GAP = 280
+const Y_GAP = 160
+const COLS = 3
+
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+    useEffect(() => {
+        const handler = () => setIsMobile(window.innerWidth < 768)
+        window.addEventListener('resize', handler)
+        return () => window.removeEventListener('resize', handler)
+    }, [])
+    return isMobile
+}
 
 function SkillNode({ data, selected }) {
     const style = data.is_implied ? GAP_STYLE.implied : (GAP_STYLE[data.gap_type] || GAP_STYLE.missing)
     return (
         <>
             <Handle type="target" position={Position.Left} style={{ background: style.border, border: 'none', width: 8, height: 8 }} />
-            <div onClick={() => data.onSelect(data)} style={{
+            <button
+                type="button"
+                className="nodrag nopan"
+                onPointerDown={event => event.stopPropagation()}
+                onClick={(event) => { event.stopPropagation(); data.onSelect(data) }}
+                style={{
                 background: style.bg,
                 border: `1.5px solid ${selected ? '#a5b4fc' : style.border}`,
-                borderRadius: 14, padding: '12px 14px', minWidth: 180, maxWidth: 210,
+                borderRadius: 14, padding: '12px 14px', width: NODE_WIDTH, height: NODE_HEIGHT,
                 boxShadow: selected ? `0 0 0 2px #6366f1, ${style.glow}` : style.glow,
                 cursor: 'pointer', transition: 'all 0.2s',
-                backdropFilter: 'blur(10px)'
+                backdropFilter: 'blur(10px)',
+                display: 'block',
+                boxSizing: 'border-box',
+                color: 'inherit',
+                font: 'inherit',
+                textAlign: 'left',
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                     <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono', fontWeight: 500, padding: '2px 6px', borderRadius: 20, color: style.text, background: `${style.border}22`, border: `1px solid ${style.border}33` }}>
@@ -50,7 +75,7 @@ function SkillNode({ data, selected }) {
                     <span style={{ fontSize: 9, color: 'rgba(100,116,139,0.5)' }}>coverage</span>
                     <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono', color: style.text, opacity: 0.6 }}>{Math.round(data.coverage_score * 100)}%</span>
                 </div>
-            </div>
+            </button>
             <Handle type="source" position={Position.Right} style={{ background: style.border, border: 'none', width: 8, height: 8 }} />
         </>
     )
@@ -58,52 +83,142 @@ function SkillNode({ data, selected }) {
 
 const nodeTypes = { skillNode: SkillNode }
 
-function buildGraph(pathway, onSelect) {
-    if (!pathway?.length) return { nodes: [], edges: [] }
-    const COLS = 3, XG = 280, YG = 160
-    const nodes = pathway.map((step, i) => ({
-        id: step.skill_id,
-        type: 'skillNode',
-        position: { x: (i % COLS) * XG + (Math.floor(i / COLS) % 2 === 1 ? 60 : 0), y: Math.floor(i / COLS) * YG },
-        data: { ...step, onSelect, is_implied: step.is_implied_prereq }
-    }))
-    const edges = []
-    for (let i = 0; i < pathway.length - 1; i++) {
-        const curr = pathway[i], next = pathway[i + 1]
-        edges.push({
-            id: `e-${curr.skill_id}-${next.skill_id}`,
-            source: curr.skill_id, target: next.skill_id,
-            type: 'smoothstep', animated: curr.gap_type === 'missing',
-            style: {
-                stroke: next.is_implied_prereq ? '#8b5cf6'
-                    : curr.gap_type === 'missing' ? '#ef4444'
-                        : curr.gap_type === 'weak' ? '#f59e0b'
-                            : 'rgba(255,255,255,0.08)',
-                strokeWidth: 1.5,
-                strokeDasharray: next.is_implied_prereq ? '5,3' : '4,3',
-                opacity: 0.6
-            },
-            markerEnd: {
-                type: MarkerType.ArrowClosed,
-                color: next.is_implied_prereq ? '#8b5cf6'
-                    : curr.gap_type === 'missing' ? '#ef4444'
-                        : curr.gap_type === 'weak' ? '#f59e0b'
-                            : 'rgba(255,255,255,0.12)'
-            }
-        })
+const getStepStyle = step => (
+    step?.is_implied_prereq || step?.is_implied
+        ? GAP_STYLE.implied
+        : (GAP_STYLE[step?.gap_type] || GAP_STYLE.missing)
+)
+
+const getNodeId = (step, index) => `${step?.skill_id || step?.skill_name || 'step'}-${index}`
+
+const getNodePosition = index => ({
+    x: (index % COLS) * X_GAP + (Math.floor(index / COLS) % 2 === 1 ? 60 : 0),
+    y: Math.floor(index / COLS) * Y_GAP
+})
+
+const getNodeCenter = index => {
+    const position = getNodePosition(index)
+    return {
+        x: position.x + NODE_WIDTH / 2,
+        y: position.y + NODE_HEIGHT / 2
     }
-    return { nodes, edges }
 }
 
-function TraceDrawer({ step, onClose }) {
-    if (!step) return null
-    const style = step.is_implied_prereq ? GAP_STYLE.implied : (GAP_STYLE[step.gap_type] || GAP_STYLE.missing)
+function getBoundaryPoint(from, to) {
+    const dx = to.x - from.x
+    const dy = to.y - from.y
+    const halfWidth = NODE_WIDTH / 2
+    const halfHeight = NODE_HEIGHT / 2
+
+    if (Math.abs(dx) >= Math.abs(dy)) {
+        return {
+            x: from.x + (dx >= 0 ? halfWidth : -halfWidth),
+            y: from.y
+        }
+    }
+
+    return {
+        x: from.x,
+        y: from.y + (dy >= 0 ? halfHeight : -halfHeight)
+    }
+}
+
+function buildGraph(pathway, onSelect) {
+    if (!pathway?.length) return { nodes: [] }
+    const nodeIds = pathway.map(getNodeId)
+    const nodes = pathway.map((step, i) => ({
+        id: nodeIds[i],
+        type: 'skillNode',
+        sourcePosition: Position.Right,
+        targetPosition: Position.Left,
+        position: getNodePosition(i),
+        zIndex: 2,
+        data: { ...step, onSelect, is_implied: step.is_implied_prereq }
+    }))
+    return { nodes }
+}
+
+function RoadmapConnectors({ pathway }) {
+    if (!pathway?.length || pathway.length < 2) return null
+
+    const rows = Math.ceil(pathway.length / COLS)
+    const width = COLS * X_GAP + NODE_WIDTH + 120
+    const height = rows * Y_GAP + NODE_HEIGHT + 120
+
     return (
-        <div style={{
+        <ViewportPortal>
+            <svg
+                aria-hidden="true"
+                style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    width,
+                    height,
+                    maxWidth: 'none',
+                    overflow: 'visible',
+                    pointerEvents: 'none',
+                    zIndex: 0,
+                }}
+            >
+                <defs>
+                    {pathway.slice(0, -1).map((step, i) => {
+                        const color = getStepStyle(step).border
+                        return (
+                            <marker
+                                key={`arrow-${i}`}
+                                id={`roadmap-arrow-${i}`}
+                                viewBox="0 0 8 8"
+                                markerWidth="6"
+                                markerHeight="6"
+                                refX="7"
+                                refY="4"
+                                orient="auto"
+                            >
+                                <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                            </marker>
+                        )
+                    })}
+                </defs>
+                {pathway.slice(0, -1).map((step, i) => {
+                    const next = pathway[i + 1]
+                    const sourceCenter = getNodeCenter(i)
+                    const targetCenter = getNodeCenter(i + 1)
+                    const source = getBoundaryPoint(sourceCenter, targetCenter)
+                    const target = getBoundaryPoint(targetCenter, sourceCenter)
+                    const color = getStepStyle(step).border
+
+                    return (
+                        <line
+                            key={`visible-edge-${getNodeId(step, i)}-${getNodeId(next, i + 1)}`}
+                            x1={source.x}
+                            y1={source.y}
+                            x2={target.x}
+                            y2={target.y}
+                            stroke={color}
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            opacity="0.85"
+                            markerEnd={`url(#roadmap-arrow-${i})`}
+                        />
+                    )
+                })}
+            </svg>
+        </ViewportPortal>
+    )
+}
+
+function TracePanel({ step, onClose, className = '', style: panelStyle, onClick, showClose = true }) {
+    if (!step) return null
+    const style = getStepStyle(step)
+    const coverage = Math.round((step.coverage_score || 0) * 100)
+    return (
+        <div className={className} onClick={onClick} style={{
             position: 'absolute', top: 0, right: 0, height: '100%', width: 'min(380px, 100%)', zIndex: 30,
             background: 'rgba(5,5,8,0.97)', borderLeft: '1px solid rgba(255,255,255,0.06)',
-            backdropFilter: 'blur(20px)', display: 'flex', flexDirection: 'column', overflow: 'hidden',
-            animation: 'fadeIn 0.2s ease-out'
+            backdropFilter: 'blur(20px)', flexDirection: 'column', overflow: 'hidden',
+            animation: 'fadeIn 0.2s ease-out',
+            ...panelStyle
         }}>
             {/* Header */}
             <div style={{ padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.06)', background: `${style.border}08` }}>
@@ -118,7 +233,9 @@ function TraceDrawer({ step, onClose }) {
                         <div style={{ fontFamily: 'Syne', fontWeight: 700, color: '#e2e8f0', fontSize: 16, lineHeight: 1.3 }}>{step.skill_name}</div>
                         <div style={{ fontSize: 12, color: 'rgba(100,116,139,0.6)', marginTop: 2, textTransform: 'capitalize' }}>{step.skill_category} skill</div>
                     </div>
-                    <button onClick={onClose} style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(148,163,184,0.7)', cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>×</button>
+                    {showClose && (
+                        <button onClick={onClose} style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(148,163,184,0.7)', cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>X</button>
+                    )}
                 </div>
             </div>
 
@@ -127,7 +244,7 @@ function TraceDrawer({ step, onClose }) {
 
                 {/* Metrics */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-                    {[['P-Score', step.p_score?.toFixed(3), '#6366f1'], ['Coverage', `${Math.round(step.coverage_score * 100)}%`, style.border], ['Difficulty', `${step.difficulty}/5`, '#f59e0b']].map(([l, v, c]) => (
+                    {[['P-Score', step.p_score?.toFixed(3) || '--', '#6366f1'], ['Coverage', `${coverage}%`, style.border], ['Difficulty', `${step.difficulty || '--'}/5`, '#f59e0b']].map(([l, v, c]) => (
                         <div key={l} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: '10px', textAlign: 'center' }}>
                             <div style={{ fontFamily: 'JetBrains Mono', fontWeight: 600, fontSize: 15, color: c, marginBottom: 2 }}>{v}</div>
                             <div style={{ fontSize: 10, color: 'rgba(100,116,139,0.6)' }}>{l}</div>
@@ -139,10 +256,10 @@ function TraceDrawer({ step, onClose }) {
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 6 }}>
                         <span style={{ color: 'rgba(148,163,184,0.6)' }}>Current Coverage</span>
-                        <span style={{ fontFamily: 'JetBrains Mono', color: style.border }}>{Math.round(step.coverage_score * 100)}%</span>
+                        <span style={{ fontFamily: 'JetBrains Mono', color: style.border }}>{coverage}%</span>
                     </div>
                     <div style={{ height: 6, background: 'rgba(255,255,255,0.05)', borderRadius: 99, overflow: 'hidden' }}>
-                        <div style={{ height: '100%', width: `${Math.round(step.coverage_score * 100)}%`, background: style.border, borderRadius: 99, boxShadow: `0 0 8px ${style.border}` }} />
+                        <div style={{ height: '100%', width: `${coverage}%`, background: style.border, borderRadius: 99, boxShadow: `0 0 8px ${style.border}` }} />
                     </div>
                 </div>
 
@@ -196,10 +313,86 @@ function TraceDrawer({ step, onClose }) {
     )
 }
 
+function TraceDrawer({ step, onClose }) {
+    return (
+        <TracePanel
+            step={step}
+            onClose={onClose}
+            style={{ display: 'flex' }}
+        />
+    )
+}
+
+function TraceModal({ step, onClose }) {
+    if (!step) return null
+
+    return (
+        <div
+            role="dialog"
+            aria-modal="true"
+            onClick={onClose}
+            style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 100,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 16,
+                background: 'rgba(0,0,0,0.5)',
+            }}
+        >
+            <div style={{ position: 'relative', width: '100%', maxWidth: 420 }} onClick={e => e.stopPropagation()}>
+                <button
+                    aria-label="Close details"
+                    onClick={onClose}
+                    type="button"
+                    style={{
+                        position: 'absolute',
+                        right: 12,
+                        top: 12,
+                        zIndex: 101,
+                        width: 32,
+                        height: 32,
+                        borderRadius: 8,
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        background: 'rgba(255,255,255,0.1)',
+                        color: '#e2e8f0',
+                        cursor: 'pointer',
+                        fontSize: 14,
+                        fontWeight: 700,
+                    }}
+                >
+                    X
+                </button>
+                <TracePanel
+                    step={step}
+                    onClose={onClose}
+                    showClose={false}
+                    style={{
+                        display: 'flex',
+                        position: 'relative',
+                        top: 'auto',
+                        right: 'auto',
+                        height: 'auto',
+                        width: '100%',
+                        maxHeight: 'min(82vh, 680px)',
+                        zIndex: 'auto',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        borderRadius: 16,
+                        boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+                    }}
+                />
+            </div>
+        </div>
+    )
+}
+
 export default function RoadmapView() {
     const { results, setStep, reset } = useAppStore()
     const [selectedStep, setSelectedStep] = useState(null)
     const [filter, setFilter] = useState('all')
+    const isMobile = useIsMobile()
     const { pathway = [], summary } = results || {}
 
     const filtered = useMemo(() => {
@@ -211,10 +404,10 @@ export default function RoadmapView() {
     }, [pathway, filter])
 
     const handleSelect = useCallback(data => setSelectedStep(data), [])
-    const { nodes: initNodes, edges: initEdges } = useMemo(() => buildGraph(filtered, handleSelect), [filtered, handleSelect])
+    const handleNodeClick = useCallback((_, node) => setSelectedStep(node.data), [])
+    const { nodes: initNodes } = useMemo(() => buildGraph(filtered, handleSelect), [filtered, handleSelect])
     const [nodes, setNodes, onNodesChange] = useNodesState(initNodes)
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges)
-    useEffect(() => { setNodes(initNodes); setEdges(initEdges) }, [initNodes, initEdges])
+    useEffect(() => { setNodes(initNodes) }, [initNodes, setNodes])
 
     if (!results) return null
 
@@ -227,13 +420,13 @@ export default function RoadmapView() {
     ]
 
     return (
-        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: '#050508' }}>
+        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: '#050508', overflow: 'hidden' }}>
             {/* Header */}
-            <header style={{
+            <header className="sticky top-0 z-50 bg-white shadow-sm" style={{
                 flexShrink: 0, padding: '12px 24px',
                 background: 'rgba(5,5,8,0.9)', backdropFilter: 'blur(20px)',
                 borderBottom: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', zIndex: 40
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap'
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -271,18 +464,24 @@ export default function RoadmapView() {
             </header>
 
             {/* Canvas */}
-            <div className="w-full overflow-x-auto" style={{ flex: 1, position: 'relative' }}>
+            <div className="w-full flex-1 overflow-x-auto overflow-y-auto h-[calc(100vh-112px)] md:h-[calc(100vh-57px)]" style={{ minHeight: 0, position: 'relative' }}>
                 <div className="h-full min-w-[900px] md:min-w-0" style={{ position: 'relative' }}>
                     <ReactFlow
                         key={filter}
-                        nodes={nodes} edges={edges}
-                        onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
+                        nodes={nodes}
+                        edges={[]}
+                        onNodesChange={onNodesChange}
+                        onNodeClick={handleNodeClick}
                         nodeTypes={nodeTypes}
+                        nodesDraggable={false}
+                        nodesConnectable={false}
+                        elementsSelectable={false}
                         fitView fitViewOptions={{ padding: 0.2 }}
                         minZoom={0.2} maxZoom={2}
                         proOptions={{ hideAttribution: true }}
                     >
                         <Background color="rgba(255,255,255,0.03)" gap={32} size={1} />
+                        <RoadmapConnectors pathway={filtered} />
                         <Controls showInteractive={false} />
                         <MiniMap
                             nodeColor={n => (n.data?.is_implied ? GAP_STYLE.implied : GAP_STYLE[n.data?.gap_type] || GAP_STYLE.missing).border}
@@ -313,7 +512,11 @@ export default function RoadmapView() {
                 )}
 
                 {/* Trace drawer */}
-                    {selectedStep && <TraceDrawer step={selectedStep} onClose={() => setSelectedStep(null)} />}
+                    {selectedStep && (
+                        isMobile
+                            ? <TraceModal step={selectedStep} onClose={() => setSelectedStep(null)} />
+                            : <TraceDrawer step={selectedStep} onClose={() => setSelectedStep(null)} />
+                    )}
                 </div>
             </div>
         </div>
