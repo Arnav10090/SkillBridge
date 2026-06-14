@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from app.core.config import settings
 from app.core.database import Base, engine
 import structlog
@@ -52,6 +53,19 @@ async def health():
         "version": settings.APP_VERSION,
         "llm_provider": settings.LLM_PROVIDER
     }
+
+
+@app.get("/api/health")
+async def api_health():
+    """
+    Lightweight keep-alive endpoint for external uptime monitors (cron-job.org,
+    UptimeRobot, etc.).  No DB access, no auth, always returns HTTP 200.
+    """
+    return {
+        "status": "ok",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
 
 # ── Dev test endpoints (remove before production) ────────────────────────────
 @app.get("/test-data")

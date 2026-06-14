@@ -275,6 +275,15 @@ skillbridge/
 │   │   │   └── RoadmapView.jsx
 │   │   ├── store/
 │   │   │   └── useAppStore.js     # Zustand + localStorage persist
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── UploadScreen.jsx
+│   │   │   ├── ProcessingScreen.jsx
+│   │   │   ├── ResultsDashboard.jsx
+│   │   │   └── RoadmapView.jsx
+│   │   ├── store/
+│   │   │   └── useAppStore.js     # Zustand + localStorage persist
 │   │   └── api/
 │   │       └── client.js          # Axios API client
 │   └── Dockerfile
@@ -293,7 +302,8 @@ skillbridge/
 | `GET /api/v1/results/{job_id}` | GET | Get full pathway + gap report |
 | `GET /api/v1/trace/{job_id}/{skill_id}` | GET | Get reasoning trace for a skill |
 | `GET /api/v1/stats` | GET | System stats |
-| `GET /health` | GET | Health check |
+| `GET /health` | GET | Health check (detailed) |
+| `GET /api/health` | GET | Keep-alive health check (external monitors) |
 | `GET /docs` | GET | Interactive Swagger UI |
 
 ---
@@ -307,6 +317,34 @@ skillbridge/
 | Pathway Validity | 100% | Topological sort guarantee |
 | Hallucination Rate | < 1% | Closed course catalog |
 | E2E Latency (p95) | < 30s | Async background tasks |
+
+---
+
+## 🔄 Keeping Render Awake
+
+The backend is hosted on Render's **free tier**, which spins down after 15 minutes of
+inactivity. To prevent cold starts, this project uses an **external uptime monitor**
+that periodically pings:
+
+```
+GET /api/health
+```
+
+The endpoint returns an instant `HTTP 200` with no database access or auth —
+keeping the dyno warm without any cost.
+
+### Quick setup (2 minutes)
+
+1. Deploy the backend to Render
+2. Create a free account at [cron-job.org](https://cron-job.org)
+3. Create a new cron job:
+   - **URL**: `https://<your-service>.onrender.com/api/health`
+   - **Schedule**: `*/10 * * * *` (every 10 minutes)
+   - **Method**: `GET`
+4. Save — done.
+
+For full configuration details, troubleshooting, and UptimeRobot as an
+alternative, see [KEEP_ALIVE_SETUP.md](./KEEP_ALIVE_SETUP.md).
 
 ---
 
